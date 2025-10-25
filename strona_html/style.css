@@ -1,0 +1,132 @@
+body.dark-bg {
+  background: #181b22;
+  color: #f0f1f5;
+  font-family: 'Roboto', Arial, sans-serif;
+  margin: 0;
+}
+
+.header {
+  background: #232634;
+  padding: 2rem 0 1.2rem 0;
+  text-align: center;
+  box-shadow: 0 2px 14px 0 rgba(0,0,0,0.36);
+}
+.main-title {
+  font-size: 2.4rem;
+  letter-spacing: 2px;
+  margin-bottom: 0.3rem;
+}
+.firm-title {
+  font-size: 2.1rem;
+  font-weight: 800;
+  letter-spacing: 2.2px;
+  text-transform: uppercase;
+  color: #ffa600;
+  margin-bottom: 0.3em;
+  text-shadow: 0 4px 24px #1e232d, 0 2px 2px #1e232d66;
+}
+.desc {
+  font-size: 1.2rem;
+  color: #a9aac9;
+  margin: 0;
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
+  line-height: 1.7;
+  text-align: justify;
+}
+
+main {
+  max-width: 900px;
+  margin: 2rem auto 0 auto;
+  padding: 0 1rem;
+}
+.app-card {
+  background: #222436;
+  border-radius: 18px;
+  box-shadow: 0 6px 18px 0 rgba(0,0,0,0.12);
+  margin-bottom: 2rem;
+  padding: 2rem 1.5rem;
+}
+.app-card h2 {
+  font-size: 2rem;
+  color: #ffa600;
+  margin-top: 0;
+}
+.app-desc {
+  font-size: 1.12rem;
+  color: #e5e6f0;
+  margin-bottom: 1.2rem;
+}
+.links {
+  margin: 0.7rem 0 1.4rem 0;
+}
+.links a {
+  display: inline-block;
+  margin-right: 0.8rem;
+  transition: transform 0.18s;
+}
+.links a:hover {
+  transform: scale(1.06);
+}
+.links img {
+  height: 50px;
+}
+.store-link.google img {
+  filter: drop-shadow(0 0 4px #23d366);
+  border-radius: 6px;
+  border: 2px solid #32e585;
+  background: linear-gradient(90deg, #0f2a19 0%, #23d366 100%);
+}
+.store-link.google:hover img {
+  border-color: #fff200;
+  filter: drop-shadow(0 0 8px #a8ff78);
+}
+.gallery {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  align-items: center;
+  margin-top: 0.7rem;
+}
+.gallery img {
+  width: 150px;
+  height: 320px;
+  object-fit: cover;
+  border-radius: 10px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.19);
+  background: #222436;
+}
+footer {
+  background: #232634;
+  text-align: center;
+  padding: 1rem;
+  margin-top: 3rem;
+  color: #a9aac9;
+  font-size: 1rem;
+  letter-spacing: 1px;
+  border-top: 1px solid #24263d;
+}
+footer a {
+  color: #ffa600;
+  text-decoration: none;
+  font-weight: 500;
+}
+@media screen and (max-width: 700px) {
+  main {
+    padding: 0 0.1rem;
+  }
+  .gallery img {
+    width: 100px;
+    height: 180px;
+  }
+  .app-card {
+    padding: 1.2rem 0.8rem;
+  }
+  .main-title {
+    font-size: 1.5rem;
+  }
+  .app-card h2 {
+    font-size: 1.3rem;
+  }
+}
