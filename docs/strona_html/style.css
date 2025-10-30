@@ -59,7 +59,7 @@ main {
   margin-bottom: 1.2rem;
 }
 .links {
-  margin: 0.7rem 0 1.4rem 0;
+  margin: 2.3rem 0 2.7rem 0;
 }
 .links a {
   display: inline-block;
@@ -70,7 +70,11 @@ main {
   transform: scale(1.06);
 }
 .links img {
-  height: 50px;
+  height: 85px;
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 2px 16px #2228bb88;
+  padding: 7px 18px;
 }
 .store-link.google img {
   filter: drop-shadow(0 0 4px #23d366);
@@ -81,6 +85,16 @@ main {
 .store-link.google:hover img {
   border-color: #fff200;
   filter: drop-shadow(0 0 8px #a8ff78);
+}
+.store-link.apple img {
+  filter: drop-shadow(0 0 4px #0b6fbe);
+  border-radius: 6px;
+  border: 2px solid #80bfff;
+  background: linear-gradient(90deg, #1a2352 0%, #0b6fbe 100%);
+}
+.store-link.apple:hover img {
+  border-color: #fff200;
+  filter: drop-shadow(0 0 8px #80bfff);
 }
 .gallery {
   display: flex;
