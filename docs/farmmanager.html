@@ -179,6 +179,20 @@
     </section>
 </main>
 <footer>
+    <p style="margin:38px 0 38px 0;text-align:center;">
+        <a href="index.html"
+           class="back-home lang-pl"
+           style="color:#23d366;font-size:1.19rem;font-weight:500;text-decoration:none;border-radius:9px;background:#fff;padding:15px 34px;box-shadow:0 2px 16px #23d36622;">⬅
+            Powrót do strony głównej</a>
+        <a href="index.html"
+           class="back-home lang-en"
+           style="display:none;color:#23d366;font-size:1.19rem;font-weight:500;text-decoration:none;border-radius:9px;background:#fff;padding:15px 34px;box-shadow:0 2px 16px #23d36622;">⬅
+            Back to main page</a>
+        <a href="index.html"
+           class="back-home lang-es"
+           style="display:none;color:#23d366;font-size:1.19rem;font-weight:500;text-decoration:none;border-radius:9px;background:#fff;padding:15px 34px;box-shadow:0 2px 16px #23d36622;">⬅
+            Volver a la página principal</a>
+    </p>
     <p>
       <span class="lang-pl"><a
               href="mailto:krz_app_supp@yahoo.com">krz_app_supp@yahoo.com</a>
@@ -233,6 +247,8 @@
       document.querySelectorAll('.lang-pl').forEach(el=>el.style.display = (lang==='pl')?'':'none');
       document.querySelectorAll('.lang-en').forEach(el=>el.style.display = (lang==='en')?'':'none');
       document.querySelectorAll('.lang-es').forEach(el=>el.style.display = (lang==='es')?'':'none');
+      document.querySelectorAll('.back-home').forEach(el=>el.style.display = 'none');
+      document.querySelector(`.back-home.lang-${lang}`).style.display = '';
       flagPl.classList.toggle('active-flag', lang==='pl');
       flagEn.classList.toggle('active-flag', lang==='en');
       flagEs.classList.toggle('active-flag', lang==='es');
