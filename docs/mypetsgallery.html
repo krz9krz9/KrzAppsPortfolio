@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <title>MyPetsGallery</title>
+    <link rel="stylesheet" href="strona_html/style.css">
+    <style>
+        /* Lightbox styles */
+        .lightbox {
+          display: none;
+          position: fixed;
+          z-index: 1000;
+          left: 0; top: 0;
+          width: 100vw; height: 100vh;
+          background: rgba(0,0,0,0.9);
+          justify-content: center;
+          align-items: center;
+          flex-direction: column;
+        }
+        .lightbox.active { display: flex; }
+        .lightbox-img {
+          max-width: 80vw;
+          max-height: 80vh;
+          box-shadow: 0 0 20px #111;
+        }
+        .lightbox-controls {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          width: 100%;
+          margin-top: 20px;
+        }
+        .lightbox-arrow {
+          font-size: 2rem;
+          color: #fff;
+          background: none;
+          border: none;
+          cursor: pointer;
+          margin: 0 40px;
+        }
+        .lightbox-close {
+          position: absolute;
+          top: 20px; right: 30px;
+          font-size: 2rem;
+          color: #fff;
+          background: none;
+          border: none;
+          cursor: pointer;
+        }
+        .active-flag {
+          border: 2px solid #2983cc !important;
+          background: #e5f0fa;
+        }
+        .gallery {
+          display: grid;
+          grid-template-columns: repeat(auto-fill,minmax(140px,1fr));
+          grid-auto-rows: auto;
+          gap: 16px;
+          margin: 18px 0 8px 0;
+          justify-items: center;
+          align-items: start;
+        }
+        .gallery .lb-thumb {
+          width: 140px;
+          max-width: 100%;
+          height: auto;
+          border-radius: 9px;
+          box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+          cursor: pointer;
+          transition: transform .13s;
+          background: #fff;
+        }
+        .gallery .lb-thumb:hover {
+          transform: scale(1.07);
+        }
+        @media (max-width: 520px) {
+          .gallery {
+            grid-template-columns: 1fr;
+          }
+        }
+    </style>
+</head>
+<body class="dark-bg">
+<div style="padding:12px;text-align:right;max-width:900px;margin:0 auto;">
+    <img id="langPl" class="lang-flag active-flag" src="https://flagcdn.com/h20/pl.png" alt="Polski"
+         style="width:32px;cursor:pointer;border:2px solid #444;border-radius:4px;padding:2px;margin-right:4px;">
+    <img id="langEn" class="lang-flag" src="https://flagcdn.com/h20/gb.png" alt="English"
+         style="width:32px;cursor:pointer;border:2px solid #ccc;border-radius:4px;padding:2px;margin-left:4px;">
+    <img id="langEs" class="lang-flag" src="https://flagcdn.com/h20/es.png" alt="Español"
+         style="width:32px;cursor:pointer;border:2px solid #ccc;border-radius:4px;padding:2px;margin-left:4px;">
+</div>
+<header class="header">
+    <div class="firm-title">
+        <span class="lang-pl">AureaSoft</span>
+        <span class="lang-en" style="display:none">AureaSoft</span>
+        <span class="lang-es" style="display:none">AureaSoft</span>
+    </div>
+    <h1 class="main-title">
+        <span class="lang-pl">MyPetsGallery</span>
+        <span class="lang-en" style="display:none">MyPetsGallery</span>
+        <span class="lang-es" style="display:none">MyPetsGallery</span>
+    </h1>
+
+</header>
+<main>
+    <!-- MyPetsGallery -->
+    <section class="app-card">
+        <h2>
+            <span class="lang-pl">MyPetsGallery</span>
+            <span class="lang-en" style="display:none;">MyPetsGallery</span>
+            <span class="lang-es" style="display:none;">MyPetsGallery</span>
+        </h2>
+        <p class="app-desc">
+          <span class="lang-pl">
+            Prosta galeria do przechowywania zdjęć Twoich pupili, z funkcją udostępniania i
+            kategoryzowania. Dostępna na Androida i iPhona – Twoje wspomnienia zawsze pod ręką!
+          </span>
+            <span class="lang-en" style="display:none;">
+            A simple gallery for storing your pet photos, with sharing and categorization features. Available for Android and iPhone — your memories always at hand!
+          </span>
+            <span class="lang-es" style="display:none;">
+            Una sencilla galería para tus mascotas, especializada en almacenar fotos y compartir recuerdos. Disponible para Android y iPhone — ¡tus memorias siempre contigo!
+          </span>
+        </p>
+        <div class="links">
+            <a href="https://play.google.com/store/apps/details?id=com.krz.my_kittens_app"
+               class="store-link google" target="_blank"><img src="strona_html/googleplay-badge.png"
+                                                              alt="Google Play"></a>
+        </div>
+        <div class="gallery">
+            <!-- MyPetsGallery - wszystkie screeny -->
+            <img class="lb-thumb lb-pets"
+                 src="strona_html/screeny/mypetsgallery/Simulator Screenshot - iPhone 13 Pro Max - 2025-10-24 at 19.52.49.png"
+                 alt="MyPetsGallery screenshot 1">
+            <img class="lb-thumb lb-pets"
+                 src="strona_html/screeny/mypetsgallery/Simulator Screenshot - iPhone 13 Pro Max - 2025-10-24 at 19.52.59.png"
+                 alt="MyPetsGallery screenshot 2">
+            <img class="lb-thumb lb-pets"
+                 src="strona_html/screeny/mypetsgallery/Simulator Screenshot - iPhone 13 Pro Max - 2025-10-24 at 19.53.25.png"
+                 alt="MyPetsGallery screenshot 3">
+            <img class="lb-thumb lb-pets"
+                 src="strona_html/screeny/mypetsgallery/Simulator Screenshot - iPhone 13 Pro Max - 2025-10-24 at 19.53.30.png"
+                 alt="MyPetsGallery screenshot 4">
+            <img class="lb-thumb lb-pets"
+                 src="strona_html/screeny/mypetsgallery/Simulator Screenshot - iPhone 13 Pro Max - 2025-10-24 at 19.53.34.png"
+                 alt="MyPetsGallery screenshot 5">
+            <img class="lb-thumb lb-pets"
+                 src="strona_html/screeny/mypetsgallery/Simulator Screenshot - iPhone 13 Pro Max - 2025-10-24 at 19.53.42.png"
+                 alt="MyPetsGallery screenshot 6">
+            <img class="lb-thumb lb-pets"
+                 src="strona_html/screeny/mypetsgallery/Simulator Screenshot - iPhone 13 Pro Max - 2025-10-24 at 19.53.48.png"
+                 alt="MyPetsGallery screenshot 7">
+            <img class="lb-thumb lb-pets"
+                 src="strona_html/screeny/mypetsgallery/Simulator Screenshot - iPhone 13 Pro Max - 2025-10-24 at 19.53.52.png"
+                 alt="MyPetsGallery screenshot 8">
+            <img class="lb-thumb lb-pets"
+                 src="strona_html/screeny/mypetsgallery/Simulator Screenshot - iPhone 13 Pro Max - 2025-10-24 at 19.54.00.png"
+                 alt="MyPetsGallery screenshot 9">
+        </div>
+        <div class="lightbox" id="lightbox-pets">
+            <button class="lightbox-close" id="lbClosePets">&times;</button>
+            <img class="lightbox-img" id="lbImgPets" src="#" alt=""/>
+            <div class="lightbox-controls">
+                <button class="lightbox-arrow" id="lbPrevPets">&#8592;</button>
+                <button class="lightbox-arrow" id="lbNextPets">&#8594;</button>
+            </div>
+        </div>
+    </section>
+</main>
+<footer>
+    <p>
+      <span class="lang-pl"><a
+              href="mailto:krz_app_supp@yahoo.com">krz_app_supp@yahoo.com</a>
+      </span>
+        <span class="lang-en" style="display:none;"> <a
+                href="mailto:krz_app_supp@yahoo.com">krz_app_supp@yahoo.com</a>
+      </span>
+        <span class="lang-es" style="display:none;"> <a
+                href="mailto:krz_app_supp@yahoo.com">krz_app_supp@yahoo.com</a>
+      </span>
+    </p>
+</footer>
+<script>
+    // -------- MyPetsGallery lightbox --------
+    const lbPets = document.getElementById('lightbox-pets');
+    const lbImgPets = document.getElementById('lbImgPets');
+    const lbPrevPets = document.getElementById('lbPrevPets');
+    const lbNextPets = document.getElementById('lbNextPets');
+    const lbClosePets = document.getElementById('lbClosePets');
+    const petsThumbs = Array.from(document.querySelectorAll('.lb-pets'));
+    let petsIndex = 0;
+    petsThumbs.forEach((img, i) => {
+      img.addEventListener('click', () => {
+        petsIndex = i;
+        showPetsLightbox();
+      });
+    });
+    function showPetsLightbox() {
+      lbImgPets.src = petsThumbs[petsIndex].src;
+      lbImgPets.alt = petsThumbs[petsIndex].alt;
+      lbPets.classList.add('active');
+    }
+    function closePetsLightbox() { lbPets.classList.remove('active'); }
+    function prevPetsImg() { petsIndex = (petsIndex - 1 + petsThumbs.length) % petsThumbs.length; showPetsLightbox(); }
+    function nextPetsImg() { petsIndex = (petsIndex + 1) % petsThumbs.length; showPetsLightbox(); }
+    lbClosePets.addEventListener('click', closePetsLightbox);
+    lbPrevPets.addEventListener('click', prevPetsImg);
+    lbNextPets.addEventListener('click', nextPetsImg);
+    lbPets.addEventListener('click', function(e){ if(e.target === lbPets) closePetsLightbox(); });
+    document.addEventListener('keydown', function(e){
+      if(lbPets.classList.contains('active')) {
+        if(e.key === 'Escape') closePetsLightbox();
+        if(e.key === 'ArrowLeft') prevPetsImg();
+        if(e.key === 'ArrowRight') nextPetsImg();
+      }
+    });
+    // Przełączanie języka PL/EN/ES przez flagi
+    const flagPl = document.getElementById('langPl');
+    const flagEn = document.getElementById('langEn');
+    const flagEs = document.getElementById('langEs');
+    function switchLang(lang) {
+      document.querySelectorAll('.lang-pl').forEach(el=>el.style.display = (lang==='pl')?'':'none');
+      document.querySelectorAll('.lang-en').forEach(el=>el.style.display = (lang==='en')?'':'none');
+      document.querySelectorAll('.lang-es').forEach(el=>el.style.display = (lang==='es')?'':'none');
+      flagPl.classList.toggle('active-flag', lang==='pl');
+      flagEn.classList.toggle('active-flag', lang==='en');
+      flagEs.classList.toggle('active-flag', lang==='es');
+    }
+    flagPl.addEventListener('click', function() { switchLang('pl'); });
+    flagEn.addEventListener('click', function() { switchLang('en'); });
+    flagEs.addEventListener('click', function() { switchLang('es'); });
+</script>
+</body>
+</html>
