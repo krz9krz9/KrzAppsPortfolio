@@ -1,0 +1,28 @@
+[
+  {
+    "relation": [
+      "delegate_permission/common.handle_all_urls",
+      "delegate_permission/common.get_login_creds"
+    ],
+    "target": {
+      "namespace": "android_app",
+      "package_name": "com.krz.goat_mng_flutter_android",
+      "sha256_cert_fingerprints": [
+        "FE:AF:CC:44:90:2F:AA:0E:44:2F:F6:E1:BE:2D:C6:B3:F8:D2:5C:79:39:B8:BF:9E:1C:93:74:F9:05:E6:7B:BE"
+      ]
+    }
+  },
+  {
+    "relation": [
+      "delegate_permission/common.handle_all_urls",
+      "delegate_permission/common.get_login_creds"
+    ],
+    "target": {
+      "namespace": "android_app",
+      "package_name": "com.krz.my_kittens_app",
+      "sha256_cert_fingerprints": [
+        "A3:A0:1E:37:7C:D2:0D:B0:CC:DE:3A:7B:16:74:38:0E:69:B5:C0:4A:E0:97:0F:F1:2D:E6:21:54:10:A4:11:75"
+      ]
+    }
+  }
+]
