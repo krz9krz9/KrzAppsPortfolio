@@ -9,13 +9,13 @@
         </filter>
     </defs>
     <rect width="1600" height="350" rx="0" fill="url(#bg)" />
-    <text x="800" y="200" text-anchor="middle" font-family="Montserrat,Arial Black,Arial,sans-serif"
+    <text x="800" y="170" text-anchor="middle" font-family="Montserrat,Arial Black,Arial,sans-serif"
         font-size="60" font-weight="bold" fill="#ffe6b8" >
         <tspan font-size="64" font-weight="normal">www.</tspan>
         <tspan font-size="120" font-weight="bold">SAUNA-MOBILNA</tspan>
         <tspan font-size="64" font-weight="normal">.pl</tspan>
     </text>
-    <text x="800" y="270" text-anchor="middle"
+    <text x="800" y="280" text-anchor="middle"
         font-family="Montserrat,Arial Black,Arial,sans-serif" font-size="70"
         fill="#fff">
         tel. 798-423-080
