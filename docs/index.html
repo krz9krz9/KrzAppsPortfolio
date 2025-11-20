@@ -157,6 +157,45 @@
     </p>
 </header>
 <main>
+    <!-- Auto Manager -->
+    <section class="app-card">
+        <h2>
+            <span class="lang-pl">Auto Manager – organizacja i kontrola życia samochodowego</span>
+            <span class="lang-en" style="display:none;">Auto Manager – car organization & optimization app</span>
+            <span class="lang-es"
+                  style="display:none;">Auto Manager – app para gestión del coche</span>
+            <span class="lang-pt"
+                  style="display:none;">Auto Manager – app para gerenciar carro</span>
+        </h2>
+        <p class="app-desc">
+          <span class="lang-pl">
+            Pełna kontrola nad kosztami, plikami, raportami i utrzymaniem samochodu! Auto Manager pomaga uporządkować dokumenty, przypomnienia oraz wydatki samochodowe. Intuicyjna organizacja, analityka i dostęp do wszystkich ważnych danych – już wkrótce na iPhone (i Android).
+          </span>
+            <span class="lang-en" style="display:none;">
+            Take full control of your car life! Organize, monitor, and optimize costs, files, reminders & analytics for all your vehicles – coming soon to iPhone (and Android).
+          </span>
+            <span class="lang-es" style="display:none;">
+            ¡Organiza, controla y optimiza tus gastos, documentos y reportes del coche! Auto Manager facilita la gestión integral del automóvil – disponible pronto para iPhone (y Android).
+          </span>
+            <span class="lang-pt" style="display:none;">
+            Tenha total controle dos custos, documentos, relatórios e manutenção do seu carro! Auto Manager facilita sua vida de motorista – em breve para iPhone (e Android).
+          </span>
+        </p>
+        <div class="links">
+            <a href="automanager.html" class="to-auto lang-pl store-link apple"
+               style="font-size:1.14rem;padding:13px 30px;margin-right:18px;font-weight:600;text-decoration:none;border-radius:9px;background:linear-gradient(90deg,#1b8aed 0%,#173e7c 100%);color:#fff;display:inline-block;box-shadow:0 2px 10px #1b8aed99">▶
+                Zobacz szczegóły Auto Manager</a>
+            <a href="automanager.html" class="to-auto lang-en store-link apple"
+               style="display:none;font-size:1.14rem;padding:13px 30px;margin-right:18px;font-weight:600;text-decoration:none;border-radius:9px;background:linear-gradient(90deg,#1b8aed 0%,#173e7c 100%);color:#fff;box-shadow:0 2px 10px #1b8aed99">▶
+                See Auto Manager details</a>
+            <a href="automanager.html" class="to-auto lang-es store-link apple"
+               style="display:none;font-size:1.14rem;padding:13px 30px;margin-right:18px;font-weight:600;text-decoration:none;border-radius:9px;background:linear-gradient(90deg,#1b8aed 0%,#173e7c 100%);color:#fff;box-shadow:0 2px 10px #1b8aed99">▶
+                Ver detalles de Auto Manager</a>
+            <a href="automanager.html" class="to-auto lang-pt store-link apple"
+               style="display:none;font-size:1.14rem;padding:13px 30px;margin-right:18px;font-weight:600;text-decoration:none;border-radius:9px;background:linear-gradient(90deg,#1b8aed 0%,#173e7c 100%);color:#fff;box-shadow:0 2px 10px #1b8aed99">▶
+                Ver detalhes de Auto Manager</a>
+        </div>
+    </section>
     <!-- FarmManager -->
     <section class="app-card">
         <h2>
@@ -299,6 +338,8 @@
       document.querySelector('.to-farm.lang-'+lang).style.display = 'inline-block';
       document.querySelectorAll('.to-pets').forEach(el=>el.style.display = 'none');
       document.querySelector('.to-pets.lang-'+lang).style.display = 'inline-block';
+      document.querySelectorAll('.to-auto').forEach(el=>el.style.display = 'none');
+      document.querySelector('.to-auto.lang-'+lang).style.display = 'inline-block';
       flagPl.classList.toggle('active-flag', lang==='pl');
       flagEn.classList.toggle('active-flag', lang==='en');
       flagEs.classList.toggle('active-flag', lang==='es');

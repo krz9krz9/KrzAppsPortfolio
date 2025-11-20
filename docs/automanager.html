@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Auto Manager – Manage, track and optimize your car life | Coming Soon</title>
+    <link rel="stylesheet" href="strona_html/style.css">
+    <style>
+        .lightbox { display: none; position: fixed; z-index: 1000; left: 0; top: 0; width: 100vw; height: 100vh; background: rgba(0,0,0,0.9); justify-content: center; align-items: center; flex-direction: column; }
+        .lightbox.active { display: flex; }
+        .lightbox-img { max-width: 80vw; max-height: 80vh; box-shadow: 0 0 20px #111; }
+        .lightbox-controls { display: flex; justify-content: center; align-items: center; width: 100%; margin-top: 20px; }
+        .lightbox-arrow { font-size: 2rem; color: #fff; background: none; border: none; cursor: pointer; margin: 0 40px; }
+        .lightbox-close { position: absolute; top: 20px; right: 30px; font-size: 2rem; color: #fff; background: none; border: none; cursor: pointer; }
+        .gallery { display: grid; grid-template-columns: repeat(auto-fill,minmax(140px,1fr)); grid-auto-rows: auto; gap: 16px; margin: 18px 0 8px 0; justify-items: center; align-items: start; }
+        .gallery .lb-thumb { width: 140px; max-width: 100%; height: auto; border-radius: 9px; box-shadow: 0 2px 8px rgba(0,0,0,0.15); cursor: pointer; transition: transform .13s; background: #fff; }
+        .gallery .lb-thumb:hover { transform: scale(1.07); }
+        @media (max-width: 520px) { .gallery { grid-template-columns: 1fr; } }
+    </style>
+    <meta name="keywords"
+          content="Auto Manager, car management, vehicle expenses, car organizer, car analytics, car app, car reminders, car maintenance, car ownership, optimize car costs, reports, car life, Android, iOS">
+    <meta name="description"
+          content="Take full control of your car life! Auto Manager helps you organize, monitor, and optimize everything about your vehicles – from costs, documents, and reminders to market listings and analytics. Track expenses, manage important files, access reports and stay on top of maintenance in one intuitive app. Auto Manager for Android and iOS coming soon!">
+    <meta name="robots" content="index, follow">
+    <meta name="author" content="Krzysztof Fornalczyk">
+    <meta property="og:title" content="Auto Manager – Car Life Organizer">
+    <meta property="og:description"
+          content="Auto Manager: track, manage, and optimize your vehicle life. Organize costs, files, maintenance, and get analytics with ease. Auto Manager for Android and iOS coming soon!">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://www.aureasoft.pl/automanager.html">
+    <meta property="og:locale" content="en_US">
+    <meta property="og:image"
+          content="https://www.aureasoft.pl/strona_html/screeny/automanager/IMG_0229.png">
+    <link rel="canonical" href="https://www.aureasoft.pl/automanager.html">
+    <!-- SEO Structured Data for AppStore -->
+    <script type="application/ld+json">
+        {
+            "@context": "https://schema.org",
+            "@type": "SoftwareApplication",
+            "name": "Auto Manager",
+            "applicationCategory": "ProductivityApplication",
+            "operatingSystem": [
+                "Android",
+                "iOS"
+            ],
+            "offers": {
+                "@type": "Offer",
+                "price": "0",
+                "priceCurrency": "USD"
+            },
+            "description": "Take full control of your car life! Auto Manager helps you organize, monitor, and optimize everything about your vehicles – from costs, documents, and reminders to market listings and analytics.",
+            "url": "https://www.aureasoft.pl/automanager.html",
+            "screenshot": [
+                "https://www.aureasoft.pl/strona_html/screeny/automanager/IMG_0229.png",
+                "https://www.aureasoft.pl/strona_html/screeny/automanager/IMG_0231.png"
+            ],
+            "author": {
+                "@type": "Organization",
+                "name": "AureaSoft"
+            }
+        }
+    </script>
+</head>
+<body class="dark-bg">
+<div style="padding:12px;text-align:right;max-width:900px;margin:0 auto;">
+    <img id="langEn" class="lang-flag active-flag" src="https://flagcdn.com/h20/gb.png"
+         alt="English"
+         style="width:32px;cursor:pointer;border:2px solid #444;border-radius:4px;padding:2px;">
+</div>
+<header class="header">
+    <div class="firm-title">AureaSoft</div>
+    <h1 class="main-title">Auto Manager</h1>
+    <div class="keywords-desc"
+         style="margin:14px auto 14px auto;font-weight:500;color:#2983cc;max-width:720px;text-align:center;background:#222436da;padding:13px 18px;border-radius:9px;box-shadow:0 2px 18px #22243644;">
+        🚗 <strong>The ultimate car life organizer and expense tracker – just for you!</strong> <br>
+        Auto Manager for Android and iOS – coming soon!
+    </div>
+</header>
+<main>
+    <section class="app-card">
+        <h2>Auto Manager – Take full control of your car life!</h2>
+        <div style="margin:12px 0;padding:10px 16px;background:#2983cc22;border-left:4px solid #2983cc;border-radius:6px;">
+            <p style="margin:4px 0;font-size:0.98rem;color:#e5e6f0;">
+                <strong>Coming soon:</strong><br>
+                Auto Manager will be available for Android and iOS
+            </p>
+        </div>
+        <p class="app-desc" style="margin-top:0.6em;font-size:1.09em;">
+            Take full control of your car life! <strong>Auto Manager</strong> helps you organize,
+            monitor, and optimize everything about your vehicles – from costs, documents, and
+            reminders to market listings and analytics.<br><br>
+            Track car expenses, manage important files, access reports and stay on top of
+            maintenance, all in one intuitive app. Make smarter decisions and enjoy hassle-free car
+            ownership!<br><br>
+            <strong>Auto Manager for Android and iOS coming soon!</strong>
+        </p>
+        <!-- App Store Button -->
+        <!-- <div class="links">
+            <a href="https://apps.apple.com/app/id6755447229" class="store-link apple"
+               target="_blank">
+                <img src="https://developer.apple.com/assets/elements/badges/download-on-the-app-store.svg"
+                     alt="Download on the App Store"
+                     style="height:40px;width:auto;margin-bottom:8px;display:block;">
+            </a>
+        </div> -->
+        <div class="platform-info" style="margin:8px 0 22px 0;text-align:center;">
+            Auto Manager for <b>Android and iOS</b> – coming soon!
+        </div>
+
+        <!-- Screenshots Gallery -->
+        <div class="gallery">
+            <img class="lb-thumb lb-auto" src="strona_html/screeny/automanager/IMG_0229.png"
+                 alt="Auto Manager screenshot 1">
+            <img class="lb-thumb lb-auto" src="strona_html/screeny/automanager/IMG_0231.png"
+                 alt="Auto Manager screenshot 2">
+
+            <img class="lb-thumb lb-auto" src="strona_html/screeny/automanager/IMG_0240.png"
+                 alt="Auto Manager screenshot 4">
+            <img class="lb-thumb lb-auto" src="strona_html/screeny/automanager/IMG_0243.png"
+                 alt="Auto Manager screenshot 5">
+            <img class="lb-thumb lb-auto" src="strona_html/screeny/automanager/IMG_0245.png"
+                 alt="Auto Manager screenshot 6">
+            <img class="lb-thumb lb-auto" src="strona_html/screeny/automanager/IMG_0246.png"
+                 alt="Auto Manager screenshot 7">
+            <img class="lb-thumb lb-auto" src="strona_html/screeny/automanager/IMG_0247.png"
+                 alt="Auto Manager screenshot 8">
+            <img class="lb-thumb lb-auto" src="strona_html/screeny/automanager/IMG_0248.png"
+                 alt="Auto Manager screenshot 9">
+            <img class="lb-thumb lb-auto" src="strona_html/screeny/automanager/IMG_0249.png"
+                 alt="Auto Manager screenshot 10">
+            <img class="lb-thumb lb-auto" src="strona_html/screeny/automanager/IMG_0250.png"
+                 alt="Auto Manager screenshot 11">
+            <img class="lb-thumb lb-auto" src="strona_html/screeny/automanager/IMG_0251.png"
+                 alt="Auto Manager screenshot 12">
+            <img class="lb-thumb lb-auto" src="strona_html/screeny/automanager/IMG_0252.png"
+                 alt="Auto Manager screenshot 13">
+            <img class="lb-thumb lb-auto" src="strona_html/screeny/automanager/IMG_0254.png"
+                 alt="Auto Manager screenshot 14">
+        </div>
+        <!-- Lightbox for gallery -->
+        <div class="lightbox" id="lightbox-auto">
+            <button class="lightbox-close" id="lbCloseAuto">&times;</button>
+            <img class="lightbox-img" id="lbImgAuto" src="#" alt=""/>
+            <div class="lightbox-controls">
+                <button class="lightbox-arrow" id="lbPrevAuto">&#8592;</button>
+                <button class="lightbox-arrow" id="lbNextAuto">&#8594;</button>
+            </div>
+        </div>
+    </section>
+</main>
+<footer>
+    <p>
+        <a href="index.html" class="back-home"
+           style="color:#23d366;font-size:1.19rem;font-weight:500;text-decoration:none;border-radius:9px;background:#fff;padding:15px 34px;box-shadow:0 2px 16px #23d36622;">&#8592;
+            Back to main page</a>
+    </p>
+    <p style="text-align:center;color:#6b7077;font-size:0.70rem;background:#16191e;padding:3px 11px;border-radius:7px;max-width:240px;margin-left:auto;margin-right:auto;">
+        &copy; AureaSoft - Krzysztof Fornalczyk
+    </p>
+    <p>
+        <a href="mailto:krz_app_supp@yahoo.com">krz_app_supp@yahoo.com</a>
+    </p>
+</footer>
+<script>
+    // Lightbox for Auto Manager gallery
+    const lbAuto = document.getElementById('lightbox-auto');
+    const lbImgAuto = document.getElementById('lbImgAuto');
+    const lbPrevAuto = document.getElementById('lbPrevAuto');
+    const lbNextAuto = document.getElementById('lbNextAuto');
+    const lbCloseAuto = document.getElementById('lbCloseAuto');
+    const autoThumbs = Array.from(document.querySelectorAll('.lb-auto'));
+    let autoIndex = 0;
+    autoThumbs.forEach((img, i) => {
+      img.addEventListener('click', () => {
+        autoIndex = i;
+        showAutoLightbox();
+      });
+    });
+    function showAutoLightbox() {
+      lbImgAuto.src = autoThumbs[autoIndex].src;
+      lbImgAuto.alt = autoThumbs[autoIndex].alt;
+      lbAuto.classList.add('active');
+    }
+    function closeAutoLightbox() { lbAuto.classList.remove('active'); }
+    function prevAutoImg() { autoIndex = (autoIndex - 1 + autoThumbs.length) % autoThumbs.length; showAutoLightbox(); }
+    function nextAutoImg() { autoIndex = (autoIndex + 1) % autoThumbs.length; showAutoLightbox(); }
+    lbCloseAuto.addEventListener('click', closeAutoLightbox);
+    lbPrevAuto.addEventListener('click', prevAutoImg);
+    lbNextAuto.addEventListener('click', nextAutoImg);
+    lbAuto.addEventListener('click', function(e){ if(e.target === lbAuto) closeAutoLightbox(); });
+    document.addEventListener('keydown', function(e){
+      if(lbAuto.classList.contains('active')) {
+        if(e.key === 'Escape') closeAutoLightbox();
+        if(e.key === 'ArrowLeft') prevAutoImg();
+        if(e.key === 'ArrowRight') nextAutoImg();
+      }
+    });
+</script>
+</body>
+</html>
