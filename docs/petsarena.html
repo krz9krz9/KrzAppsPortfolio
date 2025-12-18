@@ -1,0 +1,632 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <title>Pets Arena - Mobilna gra battle pets | iOS Android | Pet Battle Game</title>
+    <link rel="stylesheet" href="strona_html/style.css">
+    <!-- FAVICONY AUREASOFT -->
+    <link rel="icon" type="image/x-icon" href="strona_html/favicon/favicon.ico">
+    <link rel="icon" type="image/png" sizes="32x32" href="strona_html/favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="strona_html/favicon/favicon-16x16.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="strona_html/favicon/apple-touch-icon.png">
+    <link rel="manifest" href="strona_html/favicon/site.webmanifest">
+    <link rel="icon" type="image/png" sizes="192x192"
+          href="strona_html/favicon/android-chrome-192x192.png">
+    <link rel="icon" type="image/png" sizes="512x512"
+          href="strona_html/favicon/android-chrome-512x512.png">
+    <!-- KONIEC FAVICONÓW -->
+    <style>
+        /* Lightbox styles */
+        .lightbox {
+          display: none;
+          position: fixed;
+          z-index: 1000;
+          left: 0; top: 0;
+          width: 100vw; height: 100vh;
+          background: rgba(0,0,0,0.9);
+          justify-content: center;
+          align-items: center;
+          flex-direction: column;
+        }
+        .lightbox.active { display: flex; }
+        .lightbox-img {
+          max-width: 80vw;
+          max-height: 80vh;
+          box-shadow: 0 0 20px #111;
+        }
+        .lightbox-controls {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          width: 100%;
+          margin-top: 20px;
+        }
+        .lightbox-arrow {
+          font-size: 2rem;
+          color: #fff;
+          background: none;
+          border: none;
+          cursor: pointer;
+          margin: 0 40px;
+        }
+        .lightbox-close {
+          position: absolute;
+          top: 20px; right: 30px;
+          font-size: 2rem;
+          color: #fff;
+          background: none;
+          border: none;
+          cursor: pointer;
+        }
+        .active-flag {
+          border: 2px solid #2983cc !important;
+          background: #e5f0fa;
+        }
+        .gallery {
+          display: grid;
+          grid-template-columns: repeat(auto-fill,minmax(140px,1fr));
+          grid-auto-rows: auto;
+          gap: 16px;
+          margin: 18px 0 8px 0;
+          justify-items: center;
+          align-items: start;
+        }
+        .gallery .lb-thumb {
+          width: 140px;
+          max-width: 100%;
+          height: auto;
+          border-radius: 9px;
+          box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+          cursor: pointer;
+          transition: transform .13s;
+          background: #fff;
+        }
+        .gallery .lb-thumb:hover {
+          transform: scale(1.07);
+        }
+        @media (max-width: 520px) {
+          .gallery {
+            grid-template-columns: 1fr;
+          }
+        }
+    </style>
+    <meta name="keywords"
+          content="Pets Arena, pet battle game, gra o zwierzętach, pet battle iOS, pet battle Android, mobilna gra pets, real-time battles, pet training game, location-based game, gra z pupilami, pet arena game, zwierzęce batalie">
+    <meta name="description"
+          content="Pets Arena – epicka gra mobilna o walkach zwierząt! Trenuj pupile, walcz z graczami w okolicy, wspinaj się po rankingu. Gra dostępna na iOS (App Store). Location-based matchmaking, strategic gameplay. Pobierz teraz i dołącz do areny!">
+    <meta name="description"
+          content="Pets Arena – the ultimate pet battle experience! Train your pets, challenge nearby players, and climb the global leaderboard. Available on iOS (App Store). Location-based gameplay, strategic battles, free to play!"
+          lang="en">
+    <meta name="description"
+          content="Pets Arena – ¡la experiencia definitiva de batallas de mascotas! Entrena tus mascotas, desafía jugadores cercanos y sube en la clasificación global. Disponible en iOS (App Store). ¡Juego gratuito con batallas estratégicas!"
+          lang="es">
+    <meta name="description"
+          content="Pets Arena – a experiência definitiva de batalhas de pets! Treine seus pets, desafie jogadores próximos e suba no ranking global. Disponível no iOS (App Store). Jogo grátis com batalhas estratégicas!"
+          lang="pt">
+    <meta name="description"
+          content="Pets Arena – das ultimative Haustierkampf-Erlebnis! Trainiere deine Haustiere, fordere Spieler in der Nähe heraus und klettere die globale Bestenliste hinauf. Verfügbar für iOS (App Store). Kostenlos spielen!"
+          lang="de">
+    <meta name="robots" content="index, follow">
+    <meta name="author" content="AureaSoft - Krzysztof Fornalczyk">
+    <meta property="og:title" content="Pets Arena - Epic Pet Battle Game | iOS">
+    <meta property="og:description"
+          content="Trenuj pupile, walcz z graczami w okolicy i zdobywaj szczyt rankingu w tej ekscytującej grze mobilnej o walkach zwierząt! Dostępna na iOS.">
+    <meta property="og:description"
+          content="Train your pets, battle nearby players, and climb to the top! The ultimate pet battle experience on iOS."
+          lang="en">
+    <meta property="og:description"
+          content="¡Entrena tus mascotas, lucha con jugadores cercanos y alcanza la cima! La mejor experiencia de batallas de mascotas en iOS."
+          lang="es">
+    <meta property="og:description"
+          content="Treine seus pets, lute com jogadores próximos e alcance o topo! A melhor experiência de batalhas de pets no iOS."
+          lang="pt">
+    <meta property="og:description"
+          content="Trainiere deine Haustiere, kämpfe gegen Spieler in der Nähe und erreiche die Spitze! Das ultimative Haustierkampf-Erlebnis auf iOS."
+          lang="de">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://www.aureasoft.pl/petsarena.html">
+    <meta property="og:locale" content="pl_PL">
+    <meta property="og:locale:alternate" content="en_US">
+    <meta property="og:locale:alternate" content="es_ES">
+    <meta property="og:locale:alternate" content="pt_PT">
+    <meta property="og:locale:alternate" content="de_DE">
+    <meta property="og:site_name" content="AureaSoft">
+    <link rel="canonical" href="https://www.aureasoft.pl/petsarena.html">
+    <!-- JSON-LD Structured Data for SEO -->
+    <script type="application/ld+json">
+        {
+            "@context": "https://schema.org",
+            "@type": "SoftwareApplication",
+            "name": "Pets Arena",
+            "alternateName": [
+                "Pets Arena",
+                "Pet Battle Game"
+            ],
+            "applicationCategory": "GameApplication",
+            "operatingSystem": [
+                "iOS"
+            ],
+            "offers": {
+                "@type": "Offer",
+                "price": "0",
+                "priceCurrency": "USD"
+            },
+            "description": "Pets Arena to epicka gra mobilna o walkach zwierząt! Trenuj pupile, walcz z graczami w okolicy, wspinaj się po rankingu światowym.",
+            "downloadUrl": "https://apps.apple.com/pl/app/pets-rivals-arena/id6756195881?l=pl",
+            "url": "https://www.aureasoft.pl/petsarena.html",
+            "author": {
+                "@type": "Organization",
+                "name": "AureaSoft"
+            }
+        }
+    </script>
+</head>
+<body class="dark-bg">
+<div style="padding:12px;text-align:right;max-width:900px;margin:0 auto;">
+    <img id="langPl" class="lang-flag active-flag" src="https://flagcdn.com/h20/pl.png" alt="Polski"
+         style="width:32px;cursor:pointer;border:2px solid #444;border-radius:4px;padding:2px;margin-right:4px;">
+    <img id="langEn" class="lang-flag" src="https://flagcdn.com/h20/gb.png" alt="English"
+         style="width:32px;cursor:pointer;border:2px solid #ccc;border-radius:4px;padding:2px;margin-left:4px;">
+    <img id="langEs" class="lang-flag" src="https://flagcdn.com/h20/es.png" alt="Español"
+         style="width:32px;cursor:pointer;border:2px solid #ccc;border-radius:4px;padding:2px;margin-left:4px;">
+    <img id="langPt" class="lang-flag" src="https://flagcdn.com/h20/pt.png" alt="Português"
+         style="width:32px;cursor:pointer;border:2px solid #ccc;border-radius:4px;padding:2px;margin-left:4px;">
+    <img id="langDe" class="lang-flag" src="https://flagcdn.com/h20/de.png" alt="Deutsch"
+         style="width:32px;cursor:pointer;border:2px solid #ccc;border-radius:4px;padding:2px;margin-left:4px;">
+</div>
+<header class="header">
+    <div class="firm-title">
+        <span class="lang-pl">AureaSoft</span>
+        <span class="lang-en" style="display:none">AureaSoft</span>
+        <span class="lang-es" style="display:none">AureaSoft</span>
+        <span class="lang-pt" style="display:none">AureaSoft</span>
+        <span class="lang-de" style="display:none">AureaSoft</span>
+    </div>
+    <h1 class="main-title">
+        <span class="lang-pl">Pets Arena</span>
+        <span class="lang-en" style="display:none">Pets Arena</span>
+        <span class="lang-es" style="display:none">Pets Arena</span>
+        <span class="lang-pt" style="display:none">Pets Arena</span>
+        <span class="lang-de" style="display:none">Pets Arena</span>
+    </h1>
+    <div class="keywords-desc"
+         style="margin:14px auto 14px auto;font-weight:500;color:#2983cc;max-width:720px;text-align:center;background:#222436da;padding:13px 18px;border-radius:9px;box-shadow:0 2px 18px #22243644;">
+      <span class="lang-pl">
+        🎮 <strong>Epickie walki pupilów!</strong> Trenuj swoje zwierzęta, <strong>walcz z graczami w okolicy</strong> używając matchmakingu opartego na lokalizacji, wspinaj się po <strong>globalnym rankingu</strong> i zostań mistrzem areny! Dostępna na <strong>iOS (App Store)</strong>. Strategiczne batalie, tworzenie wymarzonych drużyn, powiadomienia push o wyzwaniach — <strong>wszystko w jednej darmowej grze mobilnej!</strong>
+      </span>
+        <span class="lang-en" style="display:none;">
+        🎮 <strong>Epic pet battles await!</strong> Train your pets, <strong>challenge nearby players</strong> with location-based matchmaking, climb the <strong>global leaderboard</strong> and become the Arena Champion! Available on <strong>iOS (App Store)</strong>. Strategic battles, dream team building, push notifications for challenges — <strong>all in one free mobile game!</strong>
+      </span>
+        <span class="lang-es" style="display:none;">
+        🎮 <strong>¡Batallas épicas de mascotas!</strong> Entrena tus mascotas, <strong>desafía jugadores cercanos</strong> con matchmaking basado en ubicación, sube en el <strong>ranking global</strong> y conviértete en el Campeón de la Arena! Disponible en <strong>iOS (App Store)</strong>. Batallas estratégicas, construcción de equipos, notificaciones push — <strong>¡todo en un juego móvil gratuito!</strong>
+      </span>
+        <span class="lang-pt" style="display:none;">
+        🎮 <strong>Batalhas épicas de pets!</strong> Treine seus pets, <strong>desafie jogadores próximos</strong> com matchmaking baseado em localização, suba no <strong>ranking global</strong> e torne-se o Campeão da Arena! Disponível no <strong>iOS (App Store)</strong>. Batalhas estratégicas, formação de equipes, notificações push — <strong>tudo em um jogo móvel gratuito!</strong>
+      </span>
+        <span class="lang-de" style="display:none;">
+        🎮 <strong>Epische Haustierkämpfe warten!</strong> Trainiere deine Haustiere, <strong>fordere Spieler in der Nähe heraus</strong> mit standortbasiertem Matchmaking, klettere die <strong>globale Bestenliste</strong> hinauf und werde Arena-Champion! Verfügbar für <strong>iOS (App Store)</strong>. Strategische Kämpfe, Traumteam-Aufbau, Push-Benachrichtigungen — <strong>alles in einem kostenlosen Mobile-Spiel!</strong>
+      </span>
+    </div>
+</header>
+<main>
+    <!-- Pets Arena -->
+    <section class="app-card">
+        <h2>
+            <span class="lang-pl">Pets Arena - Epiczne walki zwierząt czekają!</span>
+            <span class="lang-en" style="display:none;">Pets Arena - Epic Pet Battles Await!</span>
+            <span class="lang-es" style="display:none;">Pets Arena - ¡Batallas épicas de mascotas te esperan!</span>
+            <span class="lang-pt" style="display:none;">Pets Arena - Batalhas épicas de pets esperam por você!</span>
+            <span class="lang-de" style="display:none;">Pets Arena - Epische Haustierkämpfe erwarten dich!</span>
+        </h2>
+        <div style="margin:12px 0;padding:10px 16px;background:#2983cc22;border-left:4px solid #2983cc;border-radius:6px;">
+            <p style="margin:4px 0;font-size:0.95rem;color:#e5e6f0;">
+                <span class="lang-pl">
+                    📱 <strong>Pobierz teraz za darmo:</strong> Pets Arena dostępna w App Store (iOS)<br>
+                    🎯 <strong>Gameplay:</strong> matchmaking oparty na lokalizacji, globalny ranking, strategiczne batalie<br>
+                    🐾 <strong>Funkcje:</strong> trenowanie pupilów, tworzenie drużyny, historia walk, bezpieczne powiadomienia o wyzwaniach
+                </span>
+                <span class="lang-en" style="display:none;">
+                    📱 <strong>Download now for free:</strong> Pets Arena available on App Store (iOS)<br>
+                    🎯 <strong>Gameplay:</strong> location-based matchmaking, global leaderboard, strategic battles<br>
+                    🐾 <strong>Features:</strong> pet training, team building, battle history, safe challenge notifications
+                </span>
+                <span class="lang-es" style="display:none;">
+                    📱 <strong>Descarga ahora gratis:</strong> Pets Arena disponible en App Store (iOS)<br>
+                    🎯 <strong>Gameplay:</strong> matchmaking basado en ubicación, ranking global, batallas estratégicas<br>
+                    🐾 <strong>Características:</strong> entrenamiento de mascotas, formación de equipos, historial de batallas, notificaciones seguras
+                </span>
+                <span class="lang-pt" style="display:none;">
+                    📱 <strong>Baixe agora grátis:</strong> Pets Arena disponível na App Store (iOS)<br>
+                    🎯 <strong>Gameplay:</strong> matchmaking baseado em localização, ranking global, batalhas estratégicas<br>
+                    🐾 <strong>Recursos:</strong> treinamento de pets, formação de equipes, histórico de batalhas, notificações seguras
+                </span>
+                <span class="lang-de" style="display:none;">
+                    📱 <strong>Jetzt kostenlos herunterladen:</strong> Pets Arena verfügbar im App Store (iOS)<br>
+                    🎯 <strong>Gameplay:</strong> standortbasiertes Matchmaking, globale Bestenliste, strategische Kämpfe<br>
+                    🐾 <strong>Features:</strong> Haustiertraining, Team-Aufbau, Kampfhistorie, sichere Herausforderungs-Benachrichtigungen
+                </span>
+            </p>
+        </div>
+        <p class="app-desc">
+          <span class="lang-pl">
+            <strong>Pets Arena</strong> to <strong>mobilna gra akcji</strong> oferująca <strong>epickie walki zwierząt</strong>. Trenuj swoje pupile, wyzywaj graczy w okolicy i wspinaj się po globalnym rankingu! Gra dostępna na <strong>iOS (App Store)</strong>.<br><br>
+            
+            <strong>🐾 STWÓRZ SWOJĄ WYMARZONĄ DRUŻYNĘ</strong><br>
+            Zbieraj i trenuj unikalne zwierzęta z własnymi statystykami, poziomami i umiejętnościami. Rozwijaj swoje pupile poprzez walki i trening. Dostosowuj swoją kolekcję różnymi typami i rzadkościami zwierząt. Zbuduj ostateczny skład bojowy i stań się niepowstrzymany!<br><br>
+            
+            <strong>⚔️ EPICKIE WALKI</strong><br>
+            Wyzywaj graczy w okolicy używając matchmakingu opartego na lokalizacji lub szukaj przeciwników z całego świata. Każda bitwa jest unikalna i strategiczna. Akceptuj lub odrzucaj wyzwania i walcz na własnych warunkach. Powiadomienia push zapewniają, że nigdy nie przegapisz wyzwania od graczy w pobliżu!<br><br>
+            
+            <strong>🏆 RYWALIZUJ I WSPINAJ SIĘ PO RANKINGU</strong><br>
+            Zobacz jak wypadasz w porównaniu z graczami z całego świata w globalnym rankingu. Śledź swoje wygrane, przegrane i statystyki walk. Zdobywaj punkty doświadczenia z każdym zwycięstwem i rozwijaj swój profil, aby odblokować nowe osiągnięcia. Udowodnij, że jesteś najlepszy i zostań Mistrzem Areny!<br><br>
+            
+            <strong>📍 ROZGRYWKA OPARTA NA LOKALIZACJI</strong><br>
+            Odkrywaj pobliskich graczy w czasie rzeczywistym i wyzywaj przeciwników w swojej okolicy lub rozszerz swoje poszukiwania na cały świat. Zobacz odległość do każdego przeciwnika i wiedz, kto jest najbliżej Ciebie. Twoja dokładna lokalizacja nigdy nie jest udostępniana innym graczom – bezpiecznie i prywatnie!<br><br>
+            
+            <strong>✨ KLUCZOWE FUNKCJE</strong><br>
+            ✅ Piękny, nowoczesny interfejs użytkownika z intuicyjnym designem dla płynnej rozgrywki<br>
+            ✅ Szybka i łatwa autentykacja przez Google Sign-In<br>
+            ✅ Powiadomienia push informujące o wyzwaniach<br>
+            ✅ Kompleksowy system zarządzania pupilami do przeglądania, trenowania i organizowania kolekcji<br>
+            ✅ Historia walk śledząca wszystkie minione wyzwania i wyniki<br>
+            ✅ Personalizacja profilu – wgraj swój awatar i pokaż swoje statystyki<br>
+            ✅ Bezpieczne zapisy w chmurze – Twój postęp jest zawsze bezpieczny dzięki integracji z Firebase<br><br>
+            
+            <strong>🎮 JAK GRAĆ</strong><br>
+            • Utwórz swoje konto logując się przez Google lub email<br>
+            • Dodaj swojego pierwszego pupila i dostosuj go do swoich potrzeb<br>
+            • Użyj zakładki Battle, aby odkryć pobliskich graczy<br>
+            • Wybierz przeciwnika i wyślij mu wyzwanie<br>
+            • Odpowiadaj na nadchodzące prośby o walkę<br>
+            • Pokonuj przeciwników, aby zdobywać doświadczenie i wspinać się po rankingu<br>
+            • Trenuj swoje pupile i poprawiaj statystyki<br>
+            • Dominuj i zostań ostatecznym mistrzem Pets Arena!<br><br>
+            
+            <strong>🌟 DLACZEGO PETS ARENA?</strong><br>
+            Strategiczna rozgrywka – każda bitwa wymaga umiejętności i strategii. Globalna społeczność łącząca Cię z trenerami zwierząt z całego świata. Bezpieczeństwo – Twoje dane są chronione standardami branżowymi. Darmowa gra bez mechanizmów pay-to-win – tylko czyste umiejętności!<br><br>
+            
+            <strong>🔜 JUŻ WKRÓTCE</strong><br>
+            Stale pracujemy nad nowymi funkcjami, w tym: nowe typy i rzadkości zwierząt, tryb turniejowy, system znajomych, czat w grze, sezonowe wydarzenia i nagrody... i wiele więcej!<br><br>
+            
+            <strong>Pobierz Pets Arena już dziś</strong> i rozpocznij swoją podróż, aby zostać ostatecznym mistrzem walk zwierząt! Arena czeka... Czy jesteś gotowy?
+          </span>
+            <span class="lang-en" style="display:none;">
+            <strong>Pets Arena</strong> is the ultimate <strong>pet battle experience</strong> where you can train your pets, challenge nearby players, and climb to the top of the global leaderboard! Available on <strong>iOS (App Store)</strong>.<br><br>
+            
+            <strong>🐾 CREATE YOUR DREAM TEAM</strong><br>
+            Collect and train unique pets with their own stats, level, and abilities. Level up your pets through battles and training. Customize your collection with different pet types and rarities. Build the ultimate battle squad and become unstoppable!<br><br>
+            
+            <strong>⚔️ EPIC BATTLES</strong><br>
+            Challenge players nearby using location-based matchmaking or find opponents from around the globe. Every battle is unique and strategic. Accept or decline challenges and battle on your own terms. Push notifications ensure you never miss a challenge from nearby players!<br><br>
+            
+            <strong>🏆 COMPETE & CLIMB THE RANKS</strong><br>
+            See how you rank against players worldwide on the global leaderboard. Track your wins, losses, and battle statistics. Earn experience points with every victory and level up your profile to unlock new achievements. Prove you're the best and become the Arena Champion!<br><br>
+            
+            <strong>📍 LOCATION-BASED GAMEPLAY</strong><br>
+            Discover nearby players in real-time and challenge opponents within your area or expand your search worldwide. See the distance to each opponent and know who's closest to you. Your exact location is never shared with other players - safe and secure!<br><br>
+            
+            <strong>✨ KEY FEATURES</strong><br>
+            ✅ Beautiful, modern UI with intuitive design for seamless gameplay<br>
+            ✅ Quick and easy authentication with Google Sign-In<br>
+            ✅ Push notifications alert you when someone challenges you<br>
+            ✅ Comprehensive pet management system to view, train, and organize your collection<br>
+            ✅ Battle history tracks all your past challenges and results<br>
+            ✅ Profile customization lets you upload your avatar and showcase your stats<br>
+            ✅ Secure cloud saves mean your progress is always safe with Firebase integration<br><br>
+            
+            <strong>🎮 HOW TO PLAY</strong><br>
+            • Create your account by signing in with Google or email<br>
+            • Add your first pet and customize it to your liking<br>
+            • Use the Battle tab to discover nearby players<br>
+            • Select an opponent and send them a challenge<br>
+            • Respond to incoming battle requests<br>
+            • Defeat your opponents to gain experience and climb the leaderboard<br>
+            • Train your pets and improve your stats<br>
+            • Dominate and become the ultimate Pets Arena champion!<br><br>
+            
+            <strong>🌟 WHY PETS ARENA?</strong><br>
+            Strategic gameplay where every battle requires skill and strategy. Global community connects you with pet trainers worldwide. Safe and secure - your data is protected with industry-standard security. Free to play with no pay-to-win mechanics, just pure skill!<br><br>
+            
+            <strong>🔜 COMING SOON</strong><br>
+            We're constantly working on new features including new pet types and rarities, tournament mode, friend system, in-game chat, seasonal events and rewards, and much more!<br><br>
+            
+            <strong>Download Pets Arena now</strong> and start your journey to become the ultimate pet battle champion! The arena awaits... Are you ready?
+          </span>
+            <span class="lang-es" style="display:none;">
+            <strong>Pets Arena</strong> es la <strong>experiencia definitiva de batallas de mascotas</strong> donde puedes entrenar tus mascotas, desafiar jugadores cercanos y alcanzar la cima de la clasificación global! Disponible en <strong>iOS (App Store)</strong>.<br><br>
+            
+            <strong>🐾 CREA TU EQUIPO SOÑADO</strong><br>
+            Colecciona y entrena mascotas únicas con sus propias estadísticas, nivel y habilidades. Sube de nivel tus mascotas a través de batallas y entrenamiento. Personaliza tu colección con diferentes tipos y rarezas de mascotas. ¡Construye el escuadrón de batalla definitivo y vuélvete imparable!<br><br>
+            
+            <strong>⚔️ BATALLAS ÉPICAS</strong><br>
+            Desafía jugadores cercanos usando matchmaking basado en ubicación o encuentra oponentes de todo el mundo. Cada batalla es única y estratégica. Acepta o rechaza desafíos y lucha en tus propios términos. ¡Las notificaciones push aseguran que nunca te pierdas un desafío de jugadores cercanos!<br><br>
+            
+            <strong>🏆 COMPITE Y SUBE DE RANGO</strong><br>
+            Mira cómo te clasificas contra jugadores de todo el mundo en la clasificación global. Rastrea tus victorias, derrotas y estadísticas de batalla. Gana puntos de experiencia con cada victoria y sube de nivel tu perfil para desbloquear nuevos logros. ¡Demuestra que eres el mejor y conviértete en el Campeón de la Arena!<br><br>
+            
+            <strong>📍 GAMEPLAY BASADO EN UBICACIÓN</strong><br>
+            Descubre jugadores cercanos en tiempo real y desafía oponentes en tu área o expande tu búsqueda mundialmente. Mira la distancia a cada oponente y sabe quién está más cerca de ti. ¡Tu ubicación exacta nunca se comparte con otros jugadores - seguro y privado!<br><br>
+            
+            <strong>✨ CARACTERÍSTICAS CLAVE</strong><br>
+            ✅ Interfaz hermosa y moderna con diseño intuitivo para juego fluido<br>
+            ✅ Autenticación rápida y fácil con Google Sign-In<br>
+            ✅ Notificaciones push te alertan cuando alguien te desafía<br>
+            ✅ Sistema completo de gestión de mascotas para ver, entrenar y organizar tu colección<br>
+            ✅ Historial de batallas rastrea todos tus desafíos pasados y resultados<br>
+            ✅ Personalización de perfil te permite subir tu avatar y mostrar tus estadísticas<br>
+            ✅ Guardados seguros en la nube significan que tu progreso está siempre seguro con Firebase<br><br>
+            
+            <strong>¡Descarga Pets Arena ahora</strong> y comienza tu viaje para convertirte en el campeón definitivo de batallas de mascotas!
+          </span>
+            <span class="lang-pt" style="display:none;">
+            <strong>Pets Arena</strong> é a <strong>experiência definitiva de batalhas de pets</strong> onde você pode treinar seus pets, desafiar jogadores próximos e subir ao topo do ranking global! Disponível no <strong>iOS (App Store)</strong>.<br><br>
+            
+            <strong>🐾 CRIE SEU TIME DOS SONHOS</strong><br>
+            Colete e treine pets únicos com suas próprias estatísticas, nível e habilidades. Suba de nível seus pets através de batalhas e treinamento. Personalize sua coleção com diferentes tipos e raridades de pets. Construa o esquadrão de batalha definitivo e torne-se imparável!<br><br>
+            
+            <strong>⚔️ BATALHAS ÉPICAS</strong><br>
+            Desafie jogadores próximos usando matchmaking baseado em localização ou encontre oponentes de todo o mundo. Cada batalha é única e estratégica. Aceite ou recuse desafios e lute em seus próprios termos. Notificações push garantem que você nunca perca um desafio de jogadores próximos!<br><br>
+            
+            <strong>🏆 COMPETE E SUBA NO RANKING</strong><br>
+            Veja como você se classifica contra jogadores do mundo todo no ranking global. Acompanhe suas vitórias, derrotas e estatísticas de batalha. Ganhe pontos de experiência com cada vitória e suba de nível seu perfil para desbloquear novas conquistas. Prove que você é o melhor e torne-se o Campeão da Arena!<br><br>
+            
+            <strong>📍 GAMEPLAY BASEADO EM LOCALIZAÇÃO</strong><br>
+            Descubra jogadores próximos em tempo real e desafie oponentes na sua área ou expanda sua busca mundialmente. Veja a distância para cada oponente e saiba quem está mais perto de você. Sua localização exata nunca é compartilhada com outros jogadores - seguro e privado!<br><br>
+            
+            <strong>✨ RECURSOS PRINCIPAIS</strong><br>
+            ✅ Interface bonita e moderna com design intuitivo para gameplay perfeito<br>
+            ✅ Autenticação rápida e fácil com Google Sign-In<br>
+            ✅ Notificações push alertam quando alguém te desafia<br>
+            ✅ Sistema completo de gestão de pets para visualizar, treinar e organizar sua coleção<br>
+            ✅ Histórico de batalhas rastreia todos os seus desafios passados e resultados<br>
+            ✅ Personalização de perfil permite fazer upload do seu avatar e exibir suas estatísticas<br>
+            ✅ Salvamentos seguros na nuvem significam que seu progresso está sempre seguro com Firebase<br><br>
+            
+            <strong>Baixe Pets Arena agora</strong> e comece sua jornada para se tornar o campeão definitivo de batalhas de pets!
+          </span>
+            <span class="lang-de" style="display:none;">
+            <strong>Pets Arena</strong> ist das ultimative <strong>Haustierkampf-Erlebnis</strong>, wo du deine Haustiere trainieren, Spieler in der Nähe herausfordern und die Spitze der globalen Bestenliste erklimmen kannst! Verfügbar für <strong>iOS (App Store)</strong>.<br><br>
+            
+            <strong>🐾 ERSTELLE DEIN TRAUMTEAM</strong><br>
+            Sammle und trainiere einzigartige Haustiere mit eigenen Stats, Level und Fähigkeiten. Erhöhe das Level deiner Haustiere durch Kämpfe und Training. Passe deine Sammlung mit verschiedenen Haustiertypen und Seltenheiten an. Baue das ultimative Kampfteam auf und werde unaufhaltsam!<br><br>
+            
+            <strong>⚔️ EPISCHE KÄMPFE</strong><br>
+            Fordere Spieler in der Nähe mit standortbasiertem Matchmaking heraus oder finde Gegner aus der ganzen Welt. Jeder Kampf ist einzigartig und strategisch. Akzeptiere oder lehne Herausforderungen ab und kämpfe zu deinen Bedingungen. Push-Benachrichtigungen stellen sicher, dass du keine Herausforderung von Spielern in der Nähe verpasst!<br><br>
+            
+            <strong>🏆 KONKURRIERE UND KLETTERE DIE RÄNGE HINAUF</strong><br>
+            Sieh, wie du gegen Spieler weltweit in der globalen Bestenliste abschneidest. Verfolge deine Siege, Niederlagen und Kampfstatistiken. Verdiene Erfahrungspunkte mit jedem Sieg und erhöhe dein Profil-Level, um neue Erfolge freizuschalten. Beweise, dass du der Beste bist und werde Arena-Champion!<br><br>
+            
+            <strong>📍 STANDORTBASIERTES GAMEPLAY</strong><br>
+            Entdecke Spieler in der Nähe in Echtzeit und fordere Gegner in deiner Umgebung heraus oder erweitere deine Suche weltweit. Sieh die Entfernung zu jedem Gegner und wisse, wer dir am nächsten ist. Dein genauer Standort wird niemals mit anderen Spielern geteilt - sicher und geschützt!<br><br>
+            
+            <strong>✨ HAUPTFUNKTIONEN</strong><br>
+            ✅ Schöne, moderne Benutzeroberfläche mit intuitivem Design für nahtloses Gameplay<br>
+            ✅ Schnelle und einfache Authentifizierung mit Google Sign-In<br>
+            ✅ Push-Benachrichtigungen informieren dich, wenn dich jemand herausfordert<br>
+            ✅ Umfassendes Haustierverwaltungssystem zum Anzeigen, Trainieren und Organisieren deiner Sammlung<br>
+            ✅ Kampfhistorie verfolgt alle deine vergangenen Herausforderungen und Ergebnisse<br>
+            ✅ Profilanpassung ermöglicht das Hochladen deines Avatars und Präsentieren deiner Statistiken<br>
+            ✅ Sichere Cloud-Speicherungen bedeuten, dass dein Fortschritt mit Firebase-Integration immer sicher ist<br><br>
+            
+            <strong>Lade Pets Arena jetzt herunter</strong> und beginne deine Reise, um der ultimative Haustierkampf-Champion zu werden!
+          </span>
+        </p>
+        <div class="links">
+            <a href="https://apps.apple.com/pl/app/pets-rivals-arena/id6756195881?l=pl"
+               class="to-arena lang-pl store-link apple" target="_blank">
+                <img src="https://developer.apple.com/assets/elements/badges/download-on-the-app-store.svg"
+                     alt="Download on the App Store"
+                     style="height:40px;width:auto;margin-bottom:8px;display:block;">
+            </a>
+            <a href="https://apps.apple.com/pl/app/pets-rivals-arena/id6756195881?l=pl"
+               class="to-arena lang-en store-link apple" target="_blank" style="display:none;">
+                <img src="https://developer.apple.com/assets/elements/badges/download-on-the-app-store.svg"
+                     alt="Download on the App Store"
+                     style="height:40px;width:auto;margin-bottom:8px;display:block;">
+            </a>
+            <a href="https://apps.apple.com/pl/app/pets-rivals-arena/id6756195881?l=pl"
+               class="to-arena lang-es store-link apple" target="_blank" style="display:none;">
+                <img src="https://developer.apple.com/assets/elements/badges/download-on-the-app-store.svg"
+                     alt="Download on the App Store"
+                     style="height:40px;width:auto;margin-bottom:8px;display:block;">
+            </a>
+            <a href="https://apps.apple.com/pl/app/pets-rivals-arena/id6756195881?l=pl"
+               class="to-arena lang-pt store-link apple" target="_blank" style="display:none;">
+                <img src="https://developer.apple.com/assets/elements/badges/download-on-the-app-store.svg"
+                     alt="Download on the App Store"
+                     style="height:40px;width:auto;margin-bottom:8px;display:block;">
+            </a>
+            <a href="https://apps.apple.com/pl/app/pets-rivals-arena/id6756195881?l=pl"
+               class="to-arena lang-de store-link apple" target="_blank" style="display:none;">
+                <img src="https://developer.apple.com/assets/elements/badges/download-on-the-app-store.svg"
+                     alt="Download on the App Store"
+                     style="height:40px;width:auto;margin-bottom:8px;display:block;">
+            </a>
+        </div>
+        <div class="platform-info" style="margin:8px 0 22px 0;text-align:center;">
+            <span class="lang-pl">Pets Arena dostępna na <b>iOS</b>!</span>
+            <span class="lang-en" style="display:none;">Pets Arena available for <b>iOS</b>!</span>
+            <span class="lang-es" style="display:none;">¡Pets Arena disponible para <b>iOS</b>!</span>
+            <span class="lang-pt" style="display:none;">Pets Arena disponível para <b>iOS</b>!</span>
+            <span class="lang-de" style="display:none;">Pets Arena für <b>iOS</b>!</span>
+        </div>
+        <div class="gallery">
+            <!-- Pets Arena - wszystkie screeny -->
+            <img class="lb-thumb lb-arena"
+                 src="strona_html/screeny/petsarena/Simulator Screenshot - iPhone 13 Pro Max - 2025-12-17 at 23.24.52.png"
+                 alt="Pets Arena screenshot 2">
+            <img class="lb-thumb lb-arena"
+                 src="strona_html/screeny/petsarena/Simulator Screenshot - iPhone 13 Pro Max - 2025-12-17 at 23.26.43.png"
+                 alt="Pets Arena screenshot 3">
+            <img class="lb-thumb lb-arena"
+                 src="strona_html/screeny/petsarena/Simulator Screenshot - iPhone 13 Pro Max - 2025-12-17 at 23.27.00.png"
+                 alt="Pets Arena screenshot 4">
+            <img class="lb-thumb lb-arena"
+                 src="strona_html/screeny/petsarena/Simulator Screenshot - iPhone 13 Pro Max - 2025-12-17 at 23.27.08.png"
+                 alt="Pets Arena screenshot 5">
+            <img class="lb-thumb lb-arena"
+                 src="strona_html/screeny/petsarena/Simulator Screenshot - iPhone 13 Pro Max - 2025-12-17 at 23.27.09.png"
+                 alt="Pets Arena screenshot 6">
+            <img class="lb-thumb lb-arena"
+                 src="strona_html/screeny/petsarena/Simulator Screenshot - iPhone 13 Pro Max - 2025-12-17 at 23.27.12.png"
+                 alt="Pets Arena screenshot 7">
+            <img class="lb-thumb lb-arena"
+                 src="strona_html/screeny/petsarena/Simulator Screenshot - iPhone 13 Pro Max - 2025-12-17 at 23.27.18.png"
+                 alt="Pets Arena screenshot 8">
+            <img class="lb-thumb lb-arena"
+                 src="strona_html/screeny/petsarena/Simulator Screenshot - iPhone 13 Pro Max - 2025-12-17 at 23.27.30.png"
+                 alt="Pets Arena screenshot 9">
+        </div>
+        <div class="lightbox" id="lightbox-arena">
+            <button class="lightbox-close" id="lbCloseArena">&times;</button>
+            <img class="lightbox-img" id="lbImgArena" src="#" alt=""/>
+            <div class="lightbox-controls">
+                <button class="lightbox-arrow" id="lbPrevArena">&#8592;</button>
+                <button class="lightbox-arrow" id="lbNextArena">&#8594;</button>
+            </div>
+        </div>
+    </section>
+</main>
+<footer>
+    <section class="faq-seo"
+             style="background:#e5f0fa1a;padding:24px 20px 16px 20px;border-radius:13px;margin-bottom:19px;max-width:620px;margin-left:auto;margin-right:auto;box-shadow:0 2px 14px #22243622;">
+        <h3 style="margin-top:0;color:#48baff;padding-bottom:7px;text-align:left;font-size:1.37rem;">
+            FAQ Pets Arena</h3>
+        <ul style="list-style:none;padding-left:0;margin-top:0;">
+            <li style="margin-bottom:13px;"><b style="color:#ffa600;">Czym jest Pets Arena?</b><br>
+                <span class="lang-pl" style="color:#e5e6f0;">Pets Arena to mobilna gra akcji o walkach zwierząt. Trenuj pupile, wyzywaj graczy w okolicy przez matchmaking oparty na lokalizacji i wspinaj się po globalnym rankingu. Dostępna na iOS (App Store).</span>
+                <span class="lang-en" style="display:none;color:#e5e6f0;">Pets Arena is a mobile action game featuring pet battles. Train pets, challenge nearby players with location-based matchmaking, and climb the global leaderboard. Available on iOS (App Store).</span>
+                <span class="lang-es" style="display:none;color:#e5e6f0;">Pets Arena es un juego móvil de acción con batallas de mascotas. Entrena mascotas, desafía jugadores cercanos con matchmaking basado en ubicación y sube en el ranking global. Disponible en iOS (App Store).</span>
+                <span class="lang-pt" style="display:none;color:#e5e6f0;">Pets Arena é um jogo móvel de ação com batalhas de pets. Treine pets, desafie jogadores próximos com matchmaking baseado em localização e suba no ranking global. Disponível no iOS (App Store).</span>
+                <span class="lang-de" style="display:none;color:#e5e6f0;">Pets Arena ist ein mobiles Action-Spiel mit Haustierkämpfen. Trainiere Haustiere, fordere Spieler in der Nähe mit standortbasiertem Matchmaking heraus und klettere die globale Bestenliste hinauf. Verfügbar für iOS (App Store).</span>
+            </li>
+            <li style="margin-bottom:13px;"><b style="color:#ffa600;">Gdzie pobrać Pets Arena?</b><br>
+                <span class="lang-pl" style="color:#e5e6f0;">Gra dostępna w App Store dla urządzeń iOS (iPhone, iPad).</span>
+                <span class="lang-en" style="display:none;color:#e5e6f0;">The game is available on the App Store for iOS devices (iPhone, iPad).</span>
+                <span class="lang-es" style="display:none;color:#e5e6f0;">El juego está disponible en App Store para dispositivos iOS (iPhone, iPad).</span>
+                <span class="lang-pt" style="display:none;color:#e5e6f0;">O jogo está disponível na App Store para dispositivos iOS (iPhone, iPad).</span>
+                <span class="lang-de" style="display:none;color:#e5e6f0;">Das Spiel ist im App Store für iOS-Geräte verfügbar (iPhone, iPad).</span>
+            </li>
+            <li style="margin-bottom:13px;"><b style="color:#ffa600;">Jakie funkcje oferuje Pets Arena?</b><br>
+                <span class="lang-pl" style="color:#e5e6f0;">Matchmaking oparty na lokalizacji, trenowanie pupilów, globalny ranking, historia walk, powiadomienia push o wyzwaniach, bezpieczne zapisy w chmurze, personalizacja profilu.</span>
+                <span class="lang-en" style="display:none;color:#e5e6f0;">Location-based matchmaking, pet training, global leaderboard, battle history, push notifications for challenges, secure cloud saves, profile customization.</span>
+                <span class="lang-es" style="display:none;color:#e5e6f0;">Matchmaking basado en ubicación, entrenamiento de mascotas, ranking global, historial de batallas, notificaciones push de desafíos, guardado seguro en la nube, personalización de perfil.</span>
+                <span class="lang-pt" style="display:none;color:#e5e6f0;">Matchmaking baseado em localização, treinamento de pets, ranking global, histórico de batalhas, notificações push de desafios, salvamentos seguros na nuvem, personalização de perfil.</span>
+                <span class="lang-de" style="display:none;color:#e5e6f0;">Standortbasiertes Matchmaking, Haustiertraining, globale Bestenliste, Kampfhistorie, Push-Benachrichtigungen für Herausforderungen, sichere Cloud-Speicherungen, Profilanpassung.</span>
+            </li>
+            <li style="margin-bottom:13px;"><b style="color:#ffa600;">Czy Pets Arena jest darmowa?</b><br>
+                <span class="lang-pl" style="color:#e5e6f0;">Tak, gra jest darmowa do pobrania i grania bez mechanizmów pay-to-win.</span>
+                <span class="lang-en" style="display:none;color:#e5e6f0;">Yes, the game is free to download and play with no pay-to-win mechanics.</span>
+                <span class="lang-es" style="display:none;color:#e5e6f0;">Sí, el juego es gratis para descargar y jugar sin mecánicas pay-to-win.</span>
+                <span class="lang-pt" style="display:none;color:#e5e6f0;">Sim, o jogo é gratuito para baixar e jogar sem mecânicas pay-to-win.</span>
+                <span class="lang-de" style="display:none;color:#e5e6f0;">Ja, das Spiel ist kostenlos zum Herunterladen und Spielen ohne Pay-to-Win-Mechaniken.</span>
+            </li>
+        </ul>
+    </section>
+    <p style="margin:38px 0 38px 0;text-align:center;">
+        <a href="index.html"
+           class="back-home lang-pl"
+           style="color:#23d366;font-size:1.19rem;font-weight:500;text-decoration:none;border-radius:9px;background:#fff;padding:15px 34px;box-shadow:0 2px 16px #23d36622;">⬅
+            Powrót do strony głównej</a>
+        <a href="index.html"
+           class="back-home lang-en"
+           style="display:none;color:#23d366;font-size:1.19rem;font-weight:500;text-decoration:none;border-radius:9px;background:#fff;padding:15px 34px;box-shadow:0 2px 16px #23d36622;">⬅
+            Back to main page</a>
+        <a href="index.html"
+           class="back-home lang-es"
+           style="display:none;color:#23d366;font-size:1.19rem;font-weight:500;text-decoration:none;border-radius:9px;background:#fff;padding:15px 34px;box-shadow:0 2px 16px #23d36622;">⬅
+            Volver a la página principal</a>
+        <a href="index.html"
+           class="back-home lang-pt"
+           style="display:none;color:#23d366;font-size:1.19rem;font-weight:500;text-decoration:none;border-radius:9px;background:#fff;padding:15px 34px;box-shadow:0 2px 16px #23d36622;">⬅
+            Voltar à página principal</a>
+        <a href="index.html"
+           class="back-home lang-de"
+           style="display:none;color:#23d366;font-size:1.19rem;font-weight:500;text-decoration:none;border-radius:9px;background:#fff;padding:15px 34px;box-shadow:0 2px 16px #23d36622;">⬅
+            Zurück zur Hauptseite</a>
+    </p>
+    <p style="margin-top:9px;text-align:center;color:#6b7077;font-size:0.70rem;background:#16191e;padding:3px 11px;border-radius:7px;max-width:210px;margin-left:auto;margin-right:auto;">
+        App ID: id6756195881
+    </p>
+    <p>
+      <span class="lang-pl"><a
+              href="mailto:krz_app_supp@yahoo.com">krz_app_supp@yahoo.com</a>
+      </span>
+        <span class="lang-en" style="display:none;"> <a
+                href="mailto:krz_app_supp@yahoo.com">krz_app_supp@yahoo.com</a>
+      </span>
+        <span class="lang-es" style="display:none;"> <a
+                href="mailto:krz_app_supp@yahoo.com">krz_app_supp@yahoo.com</a>
+      </span>
+        <span class="lang-pt" style="display:none;"> <a
+                href="mailto:krz_app_supp@yahoo.com">krz_app_supp@yahoo.com</a>
+      </span>
+        <span class="lang-de" style="display:none;"> <a
+                href="mailto:krz_app_supp@yahoo.com">krz_app_supp@yahoo.com</a>
+      </span>
+    </p>
+    <div style="display:none;" aria-hidden="true">pet battles, pet arena, pets game, real-time battles, location-based game, pet training, mobile game, iOS game, strategic gameplay, leaderboard, battle game, zwierzęta gra, walki pupilów, gra mobilna
+    </div>
+</footer>
+<script>
+    // -------- Pets Arena lightbox --------
+    const lbArena = document.getElementById('lightbox-arena');
+    const lbImgArena = document.getElementById('lbImgArena');
+    const lbPrevArena = document.getElementById('lbPrevArena');
+    const lbNextArena = document.getElementById('lbNextArena');
+    const lbCloseArena = document.getElementById('lbCloseArena');
+    const arenaThumbs = Array.from(document.querySelectorAll('.lb-arena'));
+    let arenaIndex = 0;
+    arenaThumbs.forEach((img, i) => {
+      img.addEventListener('click', () => {
+        arenaIndex = i;
+        showArenaLightbox();
+      });
+    });
+    function showArenaLightbox() {
+      lbImgArena.src = arenaThumbs[arenaIndex].src;
+      lbImgArena.alt = arenaThumbs[arenaIndex].alt;
+      lbArena.classList.add('active');
+    }
+    function closeArenaLightbox() { lbArena.classList.remove('active'); }
+    function prevArenaImg() { arenaIndex = (arenaIndex - 1 + arenaThumbs.length) % arenaThumbs.length; showArenaLightbox(); }
+    function nextArenaImg() { arenaIndex = (arenaIndex + 1) % arenaThumbs.length; showArenaLightbox(); }
+    lbCloseArena.addEventListener('click', closeArenaLightbox);
+    lbPrevArena.addEventListener('click', prevArenaImg);
+    lbNextArena.addEventListener('click', nextArenaImg);
+    lbArena.addEventListener('click', function(e){ if(e.target === lbArena) closeArenaLightbox(); });
+    document.addEventListener('keydown', function(e){
+      if(lbArena.classList.contains('active')) {
+        if(e.key === 'Escape') closeArenaLightbox();
+        if(e.key === 'ArrowLeft') prevArenaImg();
+        if(e.key === 'ArrowRight') nextArenaImg();
+      }
+    });
+    // Przełączanie języka PL/EN/ES/PT/DE przez flagi
+    const flagPl = document.getElementById('langPl');
+    const flagEn = document.getElementById('langEn');
+    const flagEs = document.getElementById('langEs');
+    const flagPt = document.getElementById('langPt');
+    const flagDe = document.getElementById('langDe');
+    function switchLang(lang) {
+      document.querySelectorAll('.lang-pl').forEach(el=>el.style.display = (lang==='pl')?'':'none');
+      document.querySelectorAll('.lang-en').forEach(el=>el.style.display = (lang==='en')?'':'none');
+      document.querySelectorAll('.lang-es').forEach(el=>el.style.display = (lang==='es')?'':'none');
+      document.querySelectorAll('.lang-pt').forEach(el=>el.style.display = (lang==='pt')?'':'none');
+      document.querySelectorAll('.lang-de').forEach(el=>el.style.display = (lang==='de')?'':'none');
+      document.querySelectorAll('.back-home').forEach(el=>el.style.display = 'none');
+      document.querySelector(`.back-home.lang-${lang}`).style.display = '';
+      flagPl.classList.toggle('active-flag', lang==='pl');
+      flagEn.classList.toggle('active-flag', lang==='en');
+      flagEs.classList.toggle('active-flag', lang==='es');
+      flagPt.classList.toggle('active-flag', lang==='pt');
+      flagDe.classList.toggle('active-flag', lang==='de');
+    }
+    flagPl.addEventListener('click', function() { switchLang('pl'); });
+    flagEn.addEventListener('click', function() { switchLang('en'); });
+    flagEs.addEventListener('click', function() { switchLang('es'); });
+    flagPt.addEventListener('click', function() { switchLang('pt'); });
+    flagDe.addEventListener('click', function() { switchLang('de'); });
+</script>
+</body>
+</html>
