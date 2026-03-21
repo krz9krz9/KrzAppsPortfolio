@@ -370,11 +370,13 @@
       flagPt.classList.toggle('active-flag', lang==='pt');
       flagDe.classList.toggle('active-flag', lang==='de');
     }
-    flagPl.addEventListener('click', function() { switchLang('pl'); });
-    flagEn.addEventListener('click', function() { switchLang('en'); });
-    flagEs.addEventListener('click', function() { switchLang('es'); });
-    flagPt.addEventListener('click', function() { switchLang('pt'); });
-    flagDe.addEventListener('click', function() { switchLang('de'); });
+    flagPl.addEventListener('click', function() { switchLang('pl'); localStorage.setItem('lang','pl'); });
+    flagEn.addEventListener('click', function() { switchLang('en'); localStorage.setItem('lang','en'); });
+    flagEs.addEventListener('click', function() { switchLang('es'); localStorage.setItem('lang','es'); });
+    flagPt.addEventListener('click', function() { switchLang('pt'); localStorage.setItem('lang','pt'); });
+    flagDe.addEventListener('click', function() { switchLang('de'); localStorage.setItem('lang','de'); });
+    // Przywróć zapisany język
+    (function(){ var l = localStorage.getItem('lang'); if(l && l !== 'pl') switchLang(l); })();
 </script>
 
 </body>

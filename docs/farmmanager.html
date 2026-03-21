@@ -728,11 +728,11 @@
       document.querySelectorAll('.lb-koza-de').forEach(el=>el.style.display = (lang==='de')?'':'none');
       document.querySelectorAll('.lb-koza-pt').forEach(el=>el.style.display = (lang==='pt')?'':'none');
     }
-    flagPl.addEventListener('click', function() { switchLang('pl'); });
-    flagEn.addEventListener('click', function() { switchLang('en'); });
-    flagEs.addEventListener('click', function() { switchLang('es'); });
-    flagPt.addEventListener('click', function() { switchLang('pt'); });
-    flagDe.addEventListener('click', function() { switchLang('de'); });
+    flagPl.addEventListener('click', function() { switchLang('pl'); localStorage.setItem('lang','pl'); });
+    flagEn.addEventListener('click', function() { switchLang('en'); localStorage.setItem('lang','en'); });
+    flagEs.addEventListener('click', function() { switchLang('es'); localStorage.setItem('lang','es'); });
+    flagPt.addEventListener('click', function() { switchLang('pt'); localStorage.setItem('lang','pt'); });
+    flagDe.addEventListener('click', function() { switchLang('de'); localStorage.setItem('lang','de'); });
+    // Przywróć zapisany język
+    (function(){ var l = localStorage.getItem('lang'); if(l && l !== 'pl') switchLang(l); })();
 </script>
-</body>
-</html>
