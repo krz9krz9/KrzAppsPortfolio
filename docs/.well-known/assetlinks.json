@@ -6,7 +6,7 @@
     ],
     "target": {
       "namespace": "android_app",
-      "package_name": "com.krz.goat_mng_flutter_android4",
+       "package_name": "com.krz.goat_mng_flutter_android",
       "sha256_cert_fingerprints": [
         "FE:AF:CC:44:90:2F:AA:0E:44:2F:F6:E1:BE:2D:C6:B3:F8:D2:5C:79:39:B8:BF:9E:1C:93:74:F9:05:E6:7B:BE"
       ]
