@@ -1,0 +1,35 @@
+# =====================================================================
+# Plik .htaccess dla serwera Apache (aureasoft.pl)
+# Cel: Umożliwienie weryfikacji Android App Links
+#
+# INSTRUKCJA: Wgraj ten plik jako ".htaccess" do głównego katalogu
+# strony (public_html/) na serwerze aureasoft.pl
+# =====================================================================
+
+# Wymagane dla RewriteEngine
+Options +FollowSymLinks
+RewriteEngine On
+
+# -------------------------------------------------------
+# KLUCZOWE: Pomiń przekierowanie dla katalogu .well-known
+# To pozwala Google Play zweryfikować assetlinks.json
+# na aureasoft.pl BEZ przekierowania na www
+# -------------------------------------------------------
+RewriteCond %{REQUEST_URI} ^/.well-known/
+RewriteRule ^ - [L]
+
+# Przekieruj cały ruch HTTP → HTTPS
+RewriteCond %{HTTPS} off
+RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [R=301,L]
+
+# Przekieruj aureasoft.pl → www.aureasoft.pl (bez www → z www)
+RewriteCond %{HTTP_HOST} !^www\. [NC]
+RewriteRule ^(.*)$ https://www.%{HTTP_HOST}%{REQUEST_URI} [R=301,L]
+
+# -------------------------------------------------------
+# Opcjonalnie: Ustaw Content-Type dla assetlinks.json
+# -------------------------------------------------------
+<Files "assetlinks.json">
+    Header set Content-Type "application/json"
+</Files>
+
