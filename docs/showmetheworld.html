@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Show Me The World – Educational AI App | Coming Soon</title>
+    <link rel="stylesheet" href="strona_html/style.css">
+    <style>
+        .lightbox { display: none; position: fixed; z-index: 1000; left: 0; top: 0; width: 100vw; height: 100vh; background: rgba(0,0,0,0.9); justify-content: center; align-items: center; flex-direction: column; }
+        .lightbox.active { display: flex; }
+        .lightbox-img { max-width: 80vw; max-height: 80vh; box-shadow: 0 0 20px #111; }
+        .lightbox-controls { display: flex; justify-content: center; align-items: center; width: 100%; margin-top: 20px; }
+        .lightbox-arrow { font-size: 2rem; color: #fff; background: none; border: none; cursor: pointer; margin: 0 40px; }
+        .lightbox-close { position: absolute; top: 20px; right: 30px; font-size: 2rem; color: #fff; background: none; border: none; cursor: pointer; }
+        .gallery { display: grid; grid-template-columns: repeat(auto-fill,minmax(140px,1fr)); grid-auto-rows: auto; gap: 16px; margin: 18px 0 8px 0; justify-items: center; align-items: start; }
+        .gallery .lb-thumb { width: 140px; max-width: 100%; height: auto; border-radius: 9px; box-shadow: 0 2px 8px rgba(0,0,0,0.15); cursor: pointer; transition: transform .13s; background: #fff; }
+        .gallery .lb-thumb:hover { transform: scale(1.07); }
+        @media (max-width: 520px) { .gallery { grid-template-columns: 1fr; } }
+    </style>
+    <meta name="keywords"
+          content="Show Me The World, object recognition, AI, education, learning, wikipedia, encyclopedia, multilingual, text-to-speech">
+    <meta name="description"
+          content="Show Me The World is an innovative educational app that uses artificial intelligence to recognize objects in your environment and provide fascinating information about them. Available on iOS.">
+    <meta name="robots" content="index, follow">
+    <meta name="author" content="Krzysztof Fornalczyk">
+    <meta property="og:title" content="Show Me The World – Educational AI App">
+    <meta property="og:description"
+          content="Show Me The World: AI-powered object recognition for learning. Get instant info from Wikipedia, text-to-speech, multilingual support. Available on iOS.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://www.aureasoft.pl/showmetheworld.html">
+    <meta property="og:locale" content="en_US">
+    <meta property="og:image"
+          content="https://www.aureasoft.pl/strona_html/screeny/showmetheworld/simulator_screenshot_5A67BCFF-4EE8-4496-9D17-776BF72D5BAC.png">
+    <link rel="canonical" href="https://www.aureasoft.pl/showmetheworld.html">
+    <!-- SEO Structured Data for AppStore -->
+    <script type="application/ld+json">
+        {
+            "@context": "https://schema.org",
+            "@type": "SoftwareApplication",
+            "name": "Show Me The World",
+            "applicationCategory": "EducationalApplication",
+            "operatingSystem": "iOS",
+            "offers": {
+                "@type": "Offer",
+                "price": "0",
+                "priceCurrency": "USD"
+            },
+            "description": "Show Me The World is an innovative educational app that uses artificial intelligence to recognize objects in your environment and provide fascinating information about them.",
+            "url": "https://www.aureasoft.pl/showmetheworld.html",
+            "screenshot": [
+                "https://www.aureasoft.pl/strona_html/screeny/showmetheworld/simulator_screenshot_5A67BCFF-4EE8-4496-9D17-776BF72D5BAC.png",
+                "https://www.aureasoft.pl/strona_html/screeny/showmetheworld/simulator_screenshot_70D0C159-68D7-4239-8E6C-865253C855A5.png"
+            ],
+            "author": {
+                "@type": "Organization",
+                "name": "AureaSoft"
+            }
+        }
+    </script>
+    <!-- FAVICONY AUREASOFT -->
+    <link rel="icon" type="image/x-icon" href="strona_html/favicon/favicon.ico">
+    <link rel="icon" type="image/png" sizes="32x32" href="strona_html/favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="strona_html/favicon/favicon-16x16.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="strona_html/favicon/apple-touch-icon.png">
+    <link rel="manifest" href="strona_html/favicon/site.webmanifest">
+    <link rel="icon" type="image/png" sizes="192x192"
+          href="strona_html/favicon/android-chrome-192x192.png">
+    <link rel="icon" type="image/png" sizes="512x512"
+          href="strona_html/favicon/android-chrome-512x512.png">
+    <!-- KONIEC FAVICONÓW -->
+</head>
+<body class="dark-bg">
+<div style="padding:12px;text-align:right;max-width:900px;margin:0 auto;">
+    <img id="langPl" class="lang-flag" src="https://flagcdn.com/h20/pl.png" alt="Polski"
+         style="width:32px;cursor:pointer;border:2px solid #ccc;border-radius:4px;padding:2px;margin-right:4px;">
+    <img id="langEn" class="lang-flag active-flag" src="https://flagcdn.com/h20/gb.png"
+         alt="English"
+         style="width:32px;cursor:pointer;border:2px solid #444;border-radius:4px;padding:2px;margin-left:4px;">
+    <img id="langEs" class="lang-flag" src="https://flagcdn.com/h20/es.png" alt="Español"
+         style="width:32px;cursor:pointer;border:2px solid #ccc;border-radius:4px;padding:2px;margin-left:4px;">
+    <img id="langPt" class="lang-flag" src="https://flagcdn.com/h20/pt.png" alt="Português"
+         style="width:32px;cursor:pointer;border:2px solid #ccc;border-radius:4px;padding:2px;margin-left:4px;">
+    <img id="langDe" class="lang-flag" src="https://flagcdn.com/h20/de.png" alt="Deutsch"
+         style="width:32px;cursor:pointer;border:2px solid #ccc;border-radius:4px;padding:2px;margin-left:4px;">
+</div>
+<header class="header">
+    <div class="firm-title">
+        <span class="lang-pl">AureaSoft</span>
+        <span class="lang-en" style="display:none">AureaSoft</span>
+        <span class="lang-es" style="display:none">AureaSoft</span>
+        <span class="lang-pt" style="display:none">AureaSoft</span>
+        <span class="lang-de" style="display:none">AureaSoft</span>
+    </div>
+    <h1 class="main-title">
+        <span class="lang-pl">Show Me The World</span>
+        <span class="lang-en" style="display:none">Show Me The World</span>
+        <span class="lang-es" style="display:none">Show Me The World</span>
+        <span class="lang-pt" style="display:none">Show Me The World</span>
+        <span class="lang-de" style="display:none">Show Me The World</span>
+    </h1>
+    <div class="keywords-desc"
+         style="margin:14px auto 14px auto;font-weight:500;color:#2983cc;max-width:720px;text-align:center;background:#222436da;padding:13px 18px;border-radius:9px;box-shadow:0 2px 18px #22243644;">
+        <span class="lang-pl">
+        <a href="https://apps.apple.com/pl/app/show-me-the-world/id6757937623?l=pl" target="_blank"><img
+                src="https://developer.apple.com/assets/elements/badges/download-on-the-app-store.svg"
+                alt="Pobierz w App Store"
+                style="height:50px;vertical-align:middle;margin-right:2px;"></a>
+        </span>
+        <span class="lang-en" style="display:none">
+        <a href="https://apps.apple.com/pl/app/show-me-the-world/id6757937623?l=en" target="_blank"><img
+                src="https://developer.apple.com/assets/elements/badges/download-on-the-app-store.svg"
+                alt="Download on the App Store"
+                style="height:50px;vertical-align:middle;margin-right:2px;"></a>
+        </span>
+        <span class="lang-es" style="display:none">
+        <a href="https://apps.apple.com/pl/app/show-me-the-world/id6757937623?l=es" target="_blank"><img
+                src="https://developer.apple.com/assets/elements/badges/download-on-the-app-store.svg"
+                alt="Descargar en el App Store"
+                style="height:50px;vertical-align:middle;margin-right:2px;"></a>
+        </span>
+        <span class="lang-pt" style="display:none">
+        <a href="https://apps.apple.com/pl/app/show-me-the-world/id6757937623?l=pt" target="_blank"><img
+                src="https://developer.apple.com/assets/elements/badges/download-on-the-app-store.svg"
+                alt="Baixar na App Store"
+                style="height:50px;vertical-align:middle;margin-right:2px;"></a>
+        </span>
+        <span class="lang-de" style="display:none">
+        <a href="https://apps.apple.com/pl/app/show-me-the-world/id6757937623?l=de" target="_blank"><img
+                src="https://developer.apple.com/assets/elements/badges/download-on-the-app-store.svg"
+                alt="Im App Store laden"
+                style="height:50px;vertical-align:middle;margin-right:2px;"></a>
+        </span>
+    </div>
+</header>
+<main>
+    <section class="app-card">
+        <h2>
+            <span class="lang-pl">Show Me The World – edukacyjna aplikacja z AI!</span>
+            <span class="lang-en" style="display:none;">Show Me The World – Educational AI App!</span>
+            <span class="lang-es" style="display:none;">Show Me The World – ¡Aplicación educativa con IA!</span>
+            <span class="lang-pt" style="display:none;">Show Me The World – Aplicativo educacional com IA!</span>
+            <span class="lang-de" style="display:none;">Show Me The World – Bildungs-App mit KI!</span>
+        </h2>
+        <p class="app-desc" style="margin-top:0.6em;font-size:1.09em;">
+            <span class="lang-pl">
+                Show Me The World to innowacyjna aplikacja edukacyjna, która wykorzystuje sztuczną inteligencję do rozpoznawania obiektów w Twoim otoczeniu i dostarczania fascynujących informacji na ich temat.<br><br>
+                <strong>Kluczowe funkcje:</strong><br>
+                • Rozpoznawanie obiektów: Zrób zdjęcie lub wybierz obraz z galerii, a nasza zaawansowana technologia AI zidentyfikuje to, co widzisz z wysoką dokładnością. Aplikacja działa z przedmiotami codziennego użytku, zabytkami, roślinami, zwierzętami i wieloma innymi obiektami.<br>
+                • Uczenie się przez eksplorację: Natychmiast po rozpoznaniu obiektu aplikacja automatycznie pobiera odpowiednie informacje z Wikipedii, dając Ci natychmiastowy dostęp do wiedzy o świecie wokół Ciebie.<br>
+                • Funkcja tekst-do-mowy: Słuchaj informacji czytanych na głos dzięki wysokiej jakości funkcji tekst-do-mowy. Idealne do wielozadaniowości lub dla użytkowników z wadami wzroku.<br>
+                • Wsparcie wielojęzyczne: Aplikacja obsługuje angielski, polski, hiszpański, francuski i niemiecki. Ucz się o obiektach w preferowanym języku, co czyni ją idealną dla uczniów, nauczycieli, ciekawskich umysłów i dożywotnich uczniów.<br>
+                • Narzędzie edukacyjne: Idealne dla studentów, nauczycieli, ciekawskich umysłów i dożywotnich uczniów. Zamień codzienne chwile w okazje do nauki!<br><br>
+                Niezależnie od tego, czy eksplorujesz naturę, podróżujesz do nowych miejsc, czy po prostu jesteś ciekawy obiektów wokół domu, Show Me The World przekształca Twój smartfon w potężne narzędzie wiedzy.<br><br>
+                Pobierz teraz i zacznij eksplorować świat wokół Ciebie jak nigdy dotąd!<br><br>
+                Możesz zobaczyć nasze Warunki użytkowania EULA tutaj: https://www.apple.com/legal/internet-services/itunes/dev/stdeula/
+            </span>
+            <span class="lang-en" style="display:none;">
+                Show Me The World is an innovative educational app that uses artificial intelligence to recognize objects in your environment and provide fascinating information about them.<br><br>
+                <strong>KEY FEATURES:</strong><br>
+                • OBJECT RECOGNITION: Take a photo or select an image from your gallery, and our advanced AI technology will identify what you're seeing with high accuracy. The app works with everyday items, landmarks, plants, animals, and many other objects.<br>
+                • LEARNING THROUGH EXPLORATION: Immediately after recognizing an object, the app automatically retrieves relevant information from Wikipedia, giving you instant access to knowledge about the world around you.<br>
+                • TEXT-TO-SPEECH FUNCTIONALITY: Listen to the information read aloud with our high-quality text-to-speech feature. Perfect for multitasking or for users with visual impairments.<br>
+                • MULTILINGUAL SUPPORT: Our app supports multiple languages including English, Polish, Spanish, French, and German. Learn about objects in your preferred language, making it perfect for students, teachers, curious minds, and lifelong learners.<br>
+                • EDUCATIONAL TOOL: Ideal for students, teachers, curious minds, and lifelong learners. Turn everyday moments into learning opportunities!<br><br>
+                Whether you're exploring nature, traveling to new places, or simply curious about objects around your home, Show Me The World transforms your smartphone into a powerful knowledge tool.<br><br>
+                Download now and start exploring the world around you like never before!<br><br>
+                You can view our Terms of Use EULA here: https://www.apple.com/legal/internet-services/itunes/dev_stdeula/
+            </span>
+            <span class="lang-es" style="display:none;">
+                Show Me The World es una aplicación educativa innovadora que utiliza inteligencia artificial para reconocer objetos en tu entorno y proporcionar información fascinante sobre ellos.<br><br>
+                <strong>CARACTERÍSTICAS PRINCIPALES:</strong><br>
+                • RECONOCIMIENTO DE OBJETOS: Toma una foto o selecciona una imagen de tu galería, y nuestra tecnología AI avanzada identificará lo que estás viendo con alta precisión. La aplicación funciona con objetos cotidianos, monumentos, plantas, animales y muchos otros objetos.<br>
+                • APRENDIZAJE A TRAVÉS DE LA EXPLORACIÓN: Inmediatamente después de reconocer un objeto, la aplicación recupera automáticamente información relevante de Wikipedia, dándote acceso instantáneo al conocimiento sobre el mundo que te rodea.<br>
+                • FUNCIÓN DE TEXTO A VOZ: Escucha la información leída en voz alta con nuestra función de texto a voz de alta calidad. Perfecto para multitarea o para usuarios con discapacidades visuales.<br>
+                • SOPORTE MULTILINGÜE: Nuestra aplicación soporta múltiples idiomas, incluyendo inglés, polaco, español, francés y alemán. Aprende sobre objetos en tu idioma preferido, haciéndola perfecta para estudiantes, profesores, mentes curiosas y aprendices de por vida.<br>
+                • HERRAMIENTA EDUCATIVA: Ideal para estudiantes, profesores, mentes curiosas y aprendices de por vida. ¡Convierte momentos cotidianos en oportunidades de aprendizaje!<br><br>
+                Ya sea que estés explorando la naturaleza, viajando a nuevos lugares, o simplemente curioso sobre objetos alrededor de tu hogar, Show Me The World transforma tu smartphone en una poderosa herramienta de conocimiento.<br><br>
+                ¡Descarga ahora y comienza a explorar el mundo a tu alrededor como nunca antes!<br><br>
+                Puedes ver nuestros Términos de Uso EULA aquí: https://www.apple.com/legal/internet-services/itunes/dev/stdeula/
+            </span>
+            <span class="lang-pt" style="display:none;">
+                Show Me The World é um aplicativo educacional inovador que usa inteligência artificial para reconhecer objetos em seu ambiente e fornecer informações fascinantes sobre eles.<br><br>
+                <strong>RECURSOS PRINCIPAIS:</strong><br>
+                • RECONHECIMENTO DE OBJETOS: Tire uma foto ou selecione uma imagem da sua galeria, e nossa tecnologia AI avançada identificará o que você está vendo com alta precisão. O aplicativo funciona com objetos do dia a dia, monumentos, plantas, animais e muitos outros objetos.<br>
+                • APRENDIZADO ATRAVÉS DA EXPLORAÇÃO: Imediatamente após reconhecer um objeto, o aplicativo recupera automaticamente informações relevantes da Wikipedia, dando-lhe acesso instantâneo ao conhecimento sobre o mundo ao seu redor.<br>
+                • FUNÇÃO DE TEXTO PARA FALA: Ouça as informações lidas em voz alta com nossa função de texto para fala de alta qualidade. Perfeito para multitarefa ou para usuários com deficiências visuais.<br>
+                • SUPORTE MULTILINGUE: Nosso aplicativo suporta múltiplos idiomas, incluindo inglês, polonês, espanhol, francês e alemão. Aprenda sobre objetos no seu idioma preferido, tornando-o perfeito para estudantes, professores, mentes curiosas e aprendizes vitalícios.<br>
+                • FERRAMENTA EDUCATIVA: Ideal para estudantes, professores, mentes curiosas e aprendizes vitalícios. Transforme momentos cotidianos em oportunidades de aprendizado!<br><br>
+                Seja explorando a natureza, viajando para novos lugares, ou simplesmente curioso sobre objetos ao redor de sua casa, Show Me The World transforma seu smartphone em uma poderosa ferramenta de conhecimento.<br><br>
+                Baixe agora e comece a explorar o mundo ao seu redor como nunca antes!<br><br>
+                Você pode ver nossos Termos de Uso EULA aqui: https://www.apple.com/legal/internet-services/itunes/dev/stdeula/
+            </span>
+            <span class="lang-de" style="display:none;">
+                Show Me The World ist eine innovative Bildungs-App, die künstliche Intelligenz nutzt, um Objekte in Ihrer Umgebung zu erkennen und faszinierende Informationen darüber zu liefern.<br><br>
+                <strong>HAUPTFUNKTIONEN:</strong><br>
+                • OBJEKTERKENNUNG: Machen Sie ein Foto oder wählen Sie ein Bild aus Ihrer Galerie aus, und unsere fortschrittliche AI-Technologie identifiziert, was Sie sehen, mit hoher Genauigkeit. Die App funktioniert mit alltäglichen Gegenständen, Sehenswürdigkeiten, Pflanzen, Tieren und vielen anderen Objekten.<br>
+                • LERNEN DURCH ERFORSCHUNG: Sofort nach der Erkennung eines Objekts ruft die App automatisch relevante Informationen aus Wikipedia ab, sodass Sie sofortigen Zugang zu Wissen über die Welt um Sie herum haben.<br>
+                • TEXT-TO-SPEECH-FUNKTION: Hören Sie sich die Informationen laut vorlesen lassen mit unserer hochwertigen Text-to-Speech-Funktion. Perfekt für Multitasking oder für Benutzer mit Sehbehinderungen.<br>
+                • MEHRSPRACHIGE UNTERSTÜTZUNG: Unsere App unterstützt mehrere Sprachen, einschließlich Englisch, Polnisch, Spanisch, Französisch und Deutsch. Lernen Sie über Objekte in Ihrer bevorzugten Sprache, was sie perfekt für Schüler, Lehrer, neugierige Köpfe und lebenslange Lerner macht.<br>
+                • BILDUNGSWERKZEUG: Ideal für Schüler, Lehrer, neugierige Köpfe und lebenslange Lerner. Verwandeln Sie alltägliche Momente in Lerngelegenheiten!<br><br>
+                Egal, ob Sie die Natur erkunden, zu neuen Orten reisen oder einfach neugierig auf Objekte um Ihr Zuhause herum sind, Show Me The World verwandelt Ihr Smartphone in ein mächtiges Wissenswerkzeug.<br><br>
+                Laden Sie jetzt herunter und beginnen Sie, die Welt um Sie herum wie nie zuvor zu erkunden!<br><br>
+                Sie können unsere Nutzungsbedingungen EULA hier einsehen: https://www.apple.com/legal/internet-services/itunes/dev/stdeula/
+            </span>
+        </p>
+        <div class="platform-info" style="margin:8px 0 22px 0;text-align:center;">
+        </div>
+        <!-- Screenshots Gallery -->
+        <div class="gallery">
+            <img class="lb-thumb lb-world" src="strona_html/screeny/showmetheworld/simulator_screenshot_5A67BCFF-4EE8-4496-9D17-776BF72D5BAC.png"
+                 alt="Show Me The World screenshot 1">
+            <img class="lb-thumb lb-world" src="strona_html/screeny/showmetheworld/simulator_screenshot_70D0C159-68D7-4239-8E6C-865253C855A5.png"
+                 alt="Show Me The World screenshot 2">
+            <img class="lb-thumb lb-world" src="strona_html/screeny/showmetheworld/simulator_screenshot_A6981446-80B1-4693-9E2D-E4B53562DE88.png"
+                 alt="Show Me The World screenshot 3">
+            <img class="lb-thumb lb-world" src="strona_html/screeny/showmetheworld/simulator_screenshot_A89EBB45-2DE3-4A57-A048-EDCCC84B25AD.png"
+                 alt="Show Me The World screenshot 4">
+            <img class="lb-thumb lb-world" src="strona_html/screeny/showmetheworld/simulator_screenshot_C390B5E6-7554-4089-A107-93AC41FCC692.png"
+                 alt="Show Me The World screenshot 5">
+        </div>
+        <!-- Lightbox for gallery -->
+        <div class="lightbox" id="lightbox-world">
+            <button class="lightbox-close" id="lbCloseWorld">&times;</button>
+            <img class="lightbox-img" id="lbImgWorld" src="#" alt=""/>
+            <div class="lightbox-controls">
+                <button class="lightbox-arrow" id="lbPrevWorld">&#8592;</button>
+                <button class="lightbox-arrow" id="lbNextWorld">&#8594;</button>
+            </div>
+        </div>
+    </section>
+</main>
+<footer>
+    <p>
+        <a href="index.html" class="back-home lang-pl"
+           style="color:#23d366;font-size:1.19rem;font-weight:500;text-decoration:none;border-radius:9px;background:#fff;padding:15px 34px;box-shadow:0 2px 16px #23d36622;">&#8592;
+            Powrót do strony głównej</a>
+        <a href="index.html" class="back-home lang-en"
+           style="display:none;color:#23d366;font-size:1.19rem;font-weight:500;text-decoration:none;border-radius:9px;background:#fff;padding:15px 34px;box-shadow:0 2px 16px #23d36622;">&#8592;
+            Back to main page</a>
+        <a href="index.html" class="back-home lang-es"
+           style="display:none;color:#23d366;font-size:1.19rem;font-weight:500;text-decoration:none;border-radius:9px;background:#fff;padding:15px 34px;box-shadow:0 2px 16px #23d36622;">&#8592;
+            Volver a la página principal</a>
+        <a href="index.html" class="back-home lang-pt"
+           style="display:none;color:#23d366;font-size:1.19rem;font-weight:500;text-decoration:none;border-radius:9px;background:#fff;padding:15px 34px;box-shadow:0 2px 16px #23d36622;">&#8592;
+            Voltar à página principal</a>
+        <a href="index.html" class="back-home lang-de"
+           style="display:none;color:#23d366;font-size:1.19rem;font-weight:500;text-decoration:none;border-radius:9px;background:#fff;padding:15px 34px;box-shadow:0 2px 16px #23d36622;">&#8592;
+            Zurück zur Hauptseite</a>
+    </p>
+    <p>
+        <span class="lang-pl"><a
+                href="mailto:krz_app_supp@yahoo.com">krz_app_supp@yahoo.com</a></span>
+        <span class="lang-en" style="display:none;"><a href="mailto:krz_app_supp@yahoo.com">krz_app_supp@yahoo.com</a></span>
+        <span class="lang-es" style="display:none;"><a href="mailto:krz_app_supp@yahoo.com">krz_app_supp@yahoo.com</a></span>
+        <span class="lang-pt" style="display:none;"><a href="mailto:krz_app_supp@yahoo.com">krz_app_supp@yahoo.com</a></span>
+        <span class="lang-de" style="display:none;"><a href="mailto:krz_app_supp@yahoo.com">krz_app_supp@yahoo.com</a></span>
+    </p>
+    <p style="text-align:center;color:#6b7077;font-size:0.70rem;background:#16191e;padding:3px 11px;border-radius:7px;max-width:240px;margin-left:auto;margin-right:auto;">
+        &copy; AureaSoft - Krzysztof Fornalczyk
+    </p>
+</footer>
+<script>
+    // Lightbox for Show Me The World gallery
+    const lbWorld = document.getElementById('lightbox-world');
+    const lbImgWorld = document.getElementById('lbImgWorld');
+    const lbPrevWorld = document.getElementById('lbPrevWorld');
+    const lbNextWorld = document.getElementById('lbNextWorld');
+    const lbCloseWorld = document.getElementById('lbCloseWorld');
+    const worldThumbs = Array.from(document.querySelectorAll('.lb-world'));
+    let worldIndex = 0;
+    worldThumbs.forEach((img, i) => {
+      img.addEventListener('click', () => {
+        worldIndex = i;
+        showWorldLightbox();
+      });
+    });
+    function showWorldLightbox() {
+      lbImgWorld.src = worldThumbs[worldIndex].src;
+      lbImgWorld.alt = worldThumbs[worldIndex].alt;
+      lbWorld.classList.add('active');
+    }
+    function closeWorldLightbox() { lbWorld.classList.remove('active'); }
+    function prevWorldImg() { worldIndex = (worldIndex - 1 + worldThumbs.length) % worldThumbs.length; showWorldLightbox(); }
+    function nextWorldImg() { worldIndex = (worldIndex + 1) % worldThumbs.length; showWorldLightbox(); }
+    lbCloseWorld.addEventListener('click', closeWorldLightbox);
+    lbPrevWorld.addEventListener('click', prevWorldImg);
+    lbNextWorld.addEventListener('click', nextWorldImg);
+    lbWorld.addEventListener('click', function(e){ if(e.target === lbWorld) closeWorldLightbox(); });
+    document.addEventListener('keydown', function(e){
+      if(lbWorld.classList.contains('active')) {
+        if(e.key === 'Escape') closeWorldLightbox();
+        if(e.key === 'ArrowLeft') prevWorldImg();
+        if(e.key === 'ArrowRight') nextWorldImg();
+      }
+    });
+    // Przełączanie języka PL/EN/ES/PT przez flagi
+    const flagPl = document.getElementById('langPl');
+    const flagEn = document.getElementById('langEn');
+    const flagEs = document.getElementById('langEs');
+    const flagPt = document.getElementById('langPt');
+    const flagDe = document.getElementById('langDe');
+    function switchLang(lang) {
+      document.querySelectorAll('.lang-pl').forEach(el=>el.style.display = (lang==='pl')?'':'none');
+      document.querySelectorAll('.lang-en').forEach(el=>el.style.display = (lang==='en')?'':'none');
+      document.querySelectorAll('.lang-es').forEach(el=>el.style.display = (lang==='es')?'':'none');
+      document.querySelectorAll('.lang-pt').forEach(el=>el.style.display = (lang==='pt')?'':'none');
+      document.querySelectorAll('.lang-de').forEach(el=>el.style.display = (lang==='de')?'':'none');
+      document.querySelectorAll('.back-home').forEach(el=>el.style.display = 'none');
+      document.querySelector(`.back-home.lang-${lang}`).style.display = '';
+      flagPl.classList.toggle('active-flag', lang==='pl');
+      flagEn.classList.toggle('active-flag', lang==='en');
+      flagEs.classList.toggle('active-flag', lang==='es');
+      flagPt.classList.toggle('active-flag', lang==='pt');
+      flagDe.classList.toggle('active-flag', lang==='de');
+    }
+    flagPl.addEventListener('click', function() { switchLang('pl'); localStorage.setItem('lang','pl'); });
+    flagEn.addEventListener('click', function() { switchLang('en'); localStorage.setItem('lang','en'); });
+    flagEs.addEventListener('click', function() { switchLang('es'); localStorage.setItem('lang','es'); });
+    flagPt.addEventListener('click', function() { switchLang('pt'); localStorage.setItem('lang','pt'); });
+    flagDe.addEventListener('click', function() { switchLang('de'); localStorage.setItem('lang','de'); });
+    // Przywróć zapisany język
+    (function(){ var l = localStorage.getItem('lang'); if(l && l !== 'pl') switchLang(l); })();
+</script>
+
+</body>
+</html>
