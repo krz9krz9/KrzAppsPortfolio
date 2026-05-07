@@ -35,10 +35,4 @@
         <xhtml:link rel="alternate" hreflang="pt"
             href="https://www.aureasoft.pl/mypetsgallery.html" />
     </url>
-    <url>
-        <loc>https://www.aureasoft.pl/app-ads.txt</loc>
-        <lastmod>2026-05-07</lastmod>
-        <changefreq>monthly</changefreq>
-        <priority>0.5</priority>
-    </url>
 </urlset>
