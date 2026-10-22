@@ -84,6 +84,8 @@
          style="width:32px;cursor:pointer;border:2px solid #ccc;border-radius:4px;padding:2px;margin-left:4px;">
     <img id="langDe" class="lang-flag" src="https://flagcdn.com/h20/de.png" alt="Deutsch"
          style="width:32px;cursor:pointer;border:2px solid #ccc;border-radius:4px;padding:2px;margin-left:4px;">
+    <img id="langFr" class="lang-flag" src="https://flagcdn.com/h20/fr.png" alt="Français"
+         style="width:32px;cursor:pointer;border:2px solid #ccc;border-radius:4px;padding:2px;margin-left:4px;">
 </div>
 <header class="header">
     <div class="firm-title">
@@ -92,6 +94,7 @@
         <span class="lang-es" style="display:none">AureaSoft</span>
         <span class="lang-pt" style="display:none">AureaSoft</span>
         <span class="lang-de" style="display:none">AureaSoft</span>
+        <span class="lang-fr" style="display:none">AureaSoft</span>
     </div>
     <h1 class="main-title">
         <span class="lang-pl">Auto Manager</span>
@@ -99,6 +102,7 @@
         <span class="lang-es" style="display:none">Auto Manager</span>
         <span class="lang-pt" style="display:none">Auto Manager</span>
         <span class="lang-de" style="display:none">Auto Manager</span>
+        <span class="lang-fr" style="display:none">Auto Manager</span>
     </h1>
     <div class="keywords-desc"
          style="margin:14px auto 14px auto;font-weight:500;color:#2983cc;max-width:720px;text-align:center;background:#222436da;padding:13px 18px;border-radius:9px;box-shadow:0 2px 18px #22243644;">
@@ -162,6 +166,7 @@
             <span class="lang-es" style="display:none;">Auto Manager – ¡El control total de tu coche!</span>
             <span class="lang-pt" style="display:none;">Auto Manager – o controle total do seu carro!</span>
             <span class="lang-de" style="display:none;">Auto Manager – Holen Sie das Beste aus Ihrem Autofahrerleben heraus!</span>
+            <span class="lang-fr" style="display:none;">Auto Manager – prenez le contrôle total de votre vie automobile !</span>
         </h2>
         <p class="app-desc" style="margin-top:0.6em;font-size:1.09em;">
             <span class="lang-pl">
@@ -242,6 +247,22 @@
                         alt="Jetzt bei Google Play" style="height:50px;vertical-align:middle;"></a>
                 </div>
             </span>
+            <span class="lang-fr" style="display:none;">
+                Prenez le contrôle total de votre vie automobile ! <strong>Auto Manager</strong> vous aide à organiser, suivre et optimiser tout ce qui concerne vos véhicules : coûts, documents, rappels, annonces et analyses.<br><br>
+                Suivez les dépenses, gérez les fichiers importants, consultez les rapports et restez à jour sur l'entretien — le tout dans une seule application intuitive.<br><br>
+                <div style="margin:38px 0 38px 0;text-align:center;">
+                <b style="display:block;margin-bottom:17px;">Téléchargez Auto Manager :</b>
+                <a href="https://apps.apple.com/pl/app/auto-manager/id6755447229?l=fr"
+                   target="_blank"><img
+                        src="https://developer.apple.com/assets/elements/badges/download-on-the-app-store.svg"
+                        alt="Télécharger dans l'App Store"
+                        style="height:50px;vertical-align:middle;margin-right:2px;"></a>
+                <a href="https://play.google.com/store/apps/details?id=com.krz.auto_manager"
+                   target="_blank" class="store-link google"><img
+                        src="https://upload.wikimedia.org/wikipedia/commons/7/78/Google_Play_Store_badge_EN.svg"
+                        alt="Obtenir sur Google Play" style="height:50px;vertical-align:middle;"></a>
+                </div>
+            </span>
         </p>
         <div class="platform-info" style="margin:8px 0 22px 0;text-align:center;">
         </div>
@@ -303,6 +324,9 @@
         <a href="index.html" class="back-home lang-de"
            style="display:none;color:#23d366;font-size:1.19rem;font-weight:500;text-decoration:none;border-radius:9px;background:#fff;padding:15px 34px;box-shadow:0 2px 16px #23d36622;">&#8592;
             Zurück zur Hauptseite</a>
+        <a href="index.html" class="back-home lang-fr"
+           style="display:none;color:#23d366;font-size:1.19rem;font-weight:500;text-decoration:none;border-radius:9px;background:#fff;padding:15px 34px;box-shadow:0 2px 16px #23d36622;">&#8592;
+            Retour à la page d'accueil</a>
     </p>
     <p>
         <span class="lang-pl"><a
@@ -311,6 +335,7 @@
         <span class="lang-es" style="display:none;"><a href="mailto:krz_app_supp@yahoo.com">krz_app_supp@yahoo.com</a></span>
         <span class="lang-pt" style="display:none;"><a href="mailto:krz_app_supp@yahoo.com">krz_app_supp@yahoo.com</a></span>
         <span class="lang-de" style="display:none;"><a href="mailto:krz_app_supp@yahoo.com">krz_app_supp@yahoo.com</a></span>
+        <span class="lang-fr" style="display:none;"><a href="mailto:krz_app_supp@yahoo.com">krz_app_supp@yahoo.com</a></span>
     </p>
     <p style="text-align:center;color:#6b7077;font-size:0.70rem;background:#16191e;padding:3px 11px;border-radius:7px;max-width:240px;margin-left:auto;margin-right:auto;">
         &copy; AureaSoft - Krzysztof Fornalczyk
@@ -350,18 +375,20 @@
         if(e.key === 'ArrowRight') nextAutoImg();
       }
     });
-    // Przełączanie języka PL/EN/ES/PT przez flagi
+    // Przełączanie języka PL/EN/ES/PT/DE/FR przez flagi
     const flagPl = document.getElementById('langPl');
     const flagEn = document.getElementById('langEn');
     const flagEs = document.getElementById('langEs');
     const flagPt = document.getElementById('langPt');
     const flagDe = document.getElementById('langDe');
+    const flagFr = document.getElementById('langFr');
     function switchLang(lang) {
       document.querySelectorAll('.lang-pl').forEach(el=>el.style.display = (lang==='pl')?'':'none');
       document.querySelectorAll('.lang-en').forEach(el=>el.style.display = (lang==='en')?'':'none');
       document.querySelectorAll('.lang-es').forEach(el=>el.style.display = (lang==='es')?'':'none');
       document.querySelectorAll('.lang-pt').forEach(el=>el.style.display = (lang==='pt')?'':'none');
       document.querySelectorAll('.lang-de').forEach(el=>el.style.display = (lang==='de')?'':'none');
+      document.querySelectorAll('.lang-fr').forEach(el=>el.style.display = (lang==='fr')?'':'none');
       document.querySelectorAll('.back-home').forEach(el=>el.style.display = 'none');
       document.querySelector(`.back-home.lang-${lang}`).style.display = '';
       flagPl.classList.toggle('active-flag', lang==='pl');
@@ -369,12 +396,14 @@
       flagEs.classList.toggle('active-flag', lang==='es');
       flagPt.classList.toggle('active-flag', lang==='pt');
       flagDe.classList.toggle('active-flag', lang==='de');
+      flagFr.classList.toggle('active-flag', lang==='fr');
     }
     flagPl.addEventListener('click', function() { switchLang('pl'); localStorage.setItem('lang','pl'); });
     flagEn.addEventListener('click', function() { switchLang('en'); localStorage.setItem('lang','en'); });
     flagEs.addEventListener('click', function() { switchLang('es'); localStorage.setItem('lang','es'); });
     flagPt.addEventListener('click', function() { switchLang('pt'); localStorage.setItem('lang','pt'); });
     flagDe.addEventListener('click', function() { switchLang('de'); localStorage.setItem('lang','de'); });
+    flagFr.addEventListener('click', function() { switchLang('fr'); localStorage.setItem('lang','fr'); });
     // Przywróć zapisany język
     (function(){ var l = localStorage.getItem('lang'); if(l && l !== 'pl') switchLang(l); })();
 </script>
